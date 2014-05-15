@@ -18,33 +18,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><a href="single-item.html">HTC One</a></td>
-                            <td>2</td>
-                            <td>$250</td>
-                        </tr>
-                        <tr>
-                            <td><a href="single-item.html">Apple iPhone</a></td>
-                            <td>1</td>
-                            <td>$502</td>
-                        </tr>
-                        <tr>
-                            <td><a href="single-item.html">Galaxy Note</a></td>
-                            <td>4</td>
-                            <td>$1303</td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th>Total</th>
-                            <th>$2405</th>
-                        </tr>
+                        <?php foreach ($this->cart->contents() as $product): ?>
+                            <tr>
+                                <!-- Product  name -->
+                                <td><a href="<?= base_url() . 'products/detail/' . $product['id'] ?>"><?= $product['name'] ?></a></td>
+                                <!-- Quantity with refresh and remove button -->
+                                <td><?= $product['qty'] ?></td>
+                                <!-- Unit price -->
+                                <td><?= $product['price'] ?>€</td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Poursuivre mes achats</button>
-                <button type="button" class="btn btn-info">Commander</button>
+                <a type="button" class="btn btn-info" href="<?=  base_url()?>cart">Commander</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -58,7 +48,7 @@
             <div class="col-md-2 col-sm-2">
                 <!-- Logo -->
                 <div class="logo">
-                    <h1><a href="<?=base_url()?>">PharmaWeb</a></h1>
+                    <h1><a href="<?= base_url() ?>">PharmaWeb</a></h1>
                 </div>
             </div>
             <div class="col-md-6 col-sm-5">
@@ -66,7 +56,7 @@
                 <div class="navi">
                     <div id="ddtopmenubar" class="mattblackmenu">
                         <ul>
-                            <li><a href="<?=base_url()?>">Home</a></li>
+                            <li><a href="<?= base_url() ?>">Home</a></li>
                             <li><a href="<?= base_url() ?>products">Produits</a></li> 
                             <li><a href="#" rel="ddsubmenu1">Moi(nom)</a>
                                 <ul id="ddsubmenu1" class="ddsubmenustyle">
@@ -93,7 +83,7 @@
                 <div class="kart-links">
                     <a href="login.html">Connexion</a> 
                     <a href="register.html">S'enregistrer</a>
-                    <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> Total: 300€</a>
+                    <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> Total: <?= $this->cart->total() ?>€</a>
                 </div>
             </div>
         </div>

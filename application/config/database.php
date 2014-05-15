@@ -44,12 +44,13 @@
 | The $active_record variables lets you determine whether or not to load
 | the active record class
  * cesi : 10.33.127.132
+ * hamachi:25.124.117.35;
 */
 
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=25.124.117.35)(PORT=1521)) (CONNECT_DATA=(SID = orclpharma)))';
+$db['default']['hostname'] = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.33.127.132)(PORT=1521)) (CONNECT_DATA=(SID = orclpharma)))';
 $db['default']['username'] = 'pharmaweb';
 $db['default']['password'] = 'root';
 $db['default']['database'] = '';

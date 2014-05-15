@@ -20,6 +20,7 @@
 
                         <div class="col-md-9 col-md-push-3">
                             <?php echo set_breadcrumb(); ?>
+                            <div id="alert-container"></div>
 
                             <?php $count = 1; ?>
                             <?php foreach ($products as $product): ?>
@@ -34,21 +35,30 @@
                                     <div class="item">
                                         <!-- Item image -->
                                         <div class="item-image">
-                                            <a href="<?=base_url().'products/detail/'.$product['PRODUCTS_ID']?>"><img src="http://placekitten.com/400/400" alt="" class="img-responsive"/></a>
+                                            <a href="<?= base_url() . 'products/detail/' . $product['PRODUCTS_ID'] ?>"><img src="<?= (isset($product['ASSETS_URL']) ? $product['ASSETS_URL'] : asset_url() . 'img/no-picture.jpg') ?>" alt="" class="img-responsive"/></a>
                                         </div>
                                         <!-- Item details -->
                                         <div class="item-details">
                                             <!-- Name -->
-                                            <h6><a href="<?=base_url().'products/detail/'.$product['PRODUCTS_ID']?>"><?= word_limiter($product['PRODUCTS_LABEL'],10) ?></a></h6>
+                                            <h6><a href="<?= base_url() . 'products/detail/' . $product['PRODUCTS_ID'] ?>"><?= word_limiter($product['PRODUCTS_LABEL'], 10) ?></a></h6>
                                             <div class="clearfix"></div>
                                             <!-- Para. Note more than 2 lines. -->
-                                            <p><?= word_limiter($description,10) ?></p>
+                                            <p><?= word_limiter($description, 10) ?></p>
                                             <hr />
                                             <!-- Price -->
                                             <div class="item-price pull-left"><?= $product['PRODUCTS_TAXES_FREE_PRICE'] ?>€</div>
                                             <!-- Add to cart -->
-                                            <div class="pull-right"><a href="#" class="btn btn-danger btn-sm">Add to Cart</a></div>
+                                            <div class="pull-right">
+                                                <form id="addtocart" name="addtocart" method="post" action="<?= base_url() ?>cart/add">
+                                                    <input type="hidden" name="id" value="<?= $product['PRODUCTS_ID'] ?>">
+                                                    <input type="hidden" name="price" value="<?= $product['PRODUCTS_TAXES_FREE_PRICE'] ?>">
+                                                    <input type="hidden" name="name" value="<?= $product['PRODUCTS_LABEL'] ?>">
+                                                    <input type="hidden" name="qty" value="1">
+                                                    <button href="#" id="buttonsubmit" class="btn btn-danger btn-sm">Ajouter au panier</button>
+                                                </form>
+                                            </div>
                                             <div class="clearfix"></div>
+
                                         </div>
                                     </div>
                                 </div>

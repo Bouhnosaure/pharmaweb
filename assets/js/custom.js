@@ -147,4 +147,35 @@ $(document).ready(function() {
     $("#buttonsubmit").click(function() {
         $("#addtocart").submit();
     });
+    
+    $("#btn-flush").click(function() {
+        $("#form-flush").submit();
+    });
+    
+    $('#addtocart').on('submit', function() {
+        var $this = $(this);
+        $.ajax({
+            url: $this.attr('action'), // le nom du fichier indiqué dans le formulaire
+            type: $this.attr('method'), // la méthode indiquée dans le formulaire (get ou post)
+            data: $this.serialize(), // je sérialise les données (voir plus loin), ici les $_POST
+            success: function(html) { // je récupère la réponse du fichier PHP
+                $("#alert-container").html('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>' + html + '</strong></div>');
+                $('body,html').animate({scrollTop: 0}, 500);
+            }
+        });
+        return false; // j'empêche le navigateur de soumettre lui-même le formulaire
+    });
+
+    $(".close").click(function() {
+        $(".alert").alert('close')
+    });
 });
+
+function updateCart(parentform) {
+    $("#" + parentform).submit();
+}
+
+function deleteCart(parentform) {
+    $("#" + parentform).find('input[class*="quantity"]').first().val(0);
+    $("#" + parentform).submit();
+}

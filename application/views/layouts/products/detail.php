@@ -16,20 +16,21 @@
         <div class="shop-items">
             <div class="container">
                 <div class="row">
-
                     <?php if ($product != ""): ?>
 
                         <div class="col-md-9 col-md-push-3">
                             <?php
                             echo set_breadcrumb();
                             ?>
-
+                            <div id="alert-container"></div>
+                                
+                            
                             <div class="single-item">
                                 <div class="row">
                                     <div class="col-md-4 col-xs-5">
 
                                         <div class="item-image">
-                                            <img src="http://placekitten.com/400/400" alt="" />
+                                            <img src="<?= (isset($product['ASSETS_URL']) ? $product['ASSETS_URL'] : asset_url() . 'img/no-picture.jpg') ?>" alt="" />
                                         </div>
 
 
@@ -41,7 +42,7 @@
                                         <p><?= $product['TAXES_LABEL'] ?></p>
                                         <p><strong>Disponibilité</strong> : <?= ($product['PRODUCTS_ACTUAL_STOCK'] >= $product['PRODUCTS_ALERT_STOCK'] ? 'Disponible' : 'En cours de réaprovisionement') ?></p><br />
                                         <!-- Quantity and add to cart button -->
-                                        <form id="addtocart" name="addtocart" method="post" action="<?=  base_url()?>cart/add">
+                                        <form id="addtocart" name="addtocart" method="post" action="<?= base_url() ?>cart/add">
                                             <input type="hidden" name="id" value="<?= $product['PRODUCTS_ID'] ?>">
                                             <input type="hidden" name="price" value="<?= $product['PRODUCTS_TAXES_FREE_PRICE'] ?>">
                                             <input type="hidden" name="name" value="<?= $product['PRODUCTS_LABEL'] ?>">
