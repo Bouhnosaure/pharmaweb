@@ -81,7 +81,7 @@
             <div class="col-md-4 col-sm-5">
                 <div class="kart-links">
                     <a href="<?=site_url("user/login")?>">Connexion</a> 
-                    <a href="<?=site_url("user/register")?>">S'enregistrer</a>
+                    <a href="<?=site_url("user/register?op1=on&op1=on&op1=on#")?>">S'enregistrer</a>
                     <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> Total: <?= $this->cart->total() ?>€</a>
                 </div>
             </div>

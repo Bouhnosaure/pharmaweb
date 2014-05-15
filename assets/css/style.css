@@ -1120,8 +1120,8 @@ strong{
 
 .shop-items .item{
    position:relative;
-	max-height: 320px;
-	max-width: 250px;
+	height: 315px;
+	max-width: 300px;
 	margin: 10px auto;
 	padding: 20px 10px 10px 10px;
    background:#fff;
@@ -1196,13 +1196,14 @@ strong{
 
 .shop-items .item-price{
 	margin: 7px 5px;
+        margin-top:5px;
 	display: inline-block;
-	border-radius: 5px;
 	font-size: 13px;
 	font-weight: bold;
    background:#16cbe6;
    color:#fff;
-   width:40px;
+   width:60px;
+   height: 30px ;
    text-align:center;
 }
 

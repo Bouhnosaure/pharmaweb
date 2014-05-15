@@ -32,7 +32,7 @@
                                     echo '<div class="row">';
                                 }
                                 ?>
-                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="item">
                                         <!-- Item image -->
                                         <div class="item-image">
@@ -44,7 +44,7 @@
                                             <h6><a href="<?= base_url() . 'products/detail/' . $product['PRODUCTS_ID'] ?>"><?= word_limiter($product['PRODUCTS_LABEL'], 10) ?></a></h6>
                                             <div class="clearfix"></div>
                                             <!-- Para. Note more than 2 lines. -->
-                                            <p><?= word_limiter($description, 10) ?></p>
+                                            <p><?= word_limiter($description, 5) ?></p>
                                             <hr />
                                             <!-- Price -->
                                             <div class="item-price pull-left"><?= $product['PRODUCTS_TAXES_FREE_PRICE'] ?>€</div>
