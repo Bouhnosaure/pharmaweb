@@ -18,70 +18,75 @@ class Categories extends CI_Controller {
     }
 
     public function index() {
+        
         $this->load->model('categories_model');
-        $this->output->set_header('Content-Type: text/html; charset=utf-8');
         $topcategories = $this->categories_model->get_categories();
+        $html = "";
         $index = 1;
         $item = 1;
-        echo '<ul id="menu-group-1" class="nav menu">';
+        $html .=  '<ul id="menu-group-1" class="nav menu">';
         foreach ($topcategories as $topcategorie) {
 
             $subcategories = $this->categories_model->get_sub_categories($topcategorie->CATEGORIES_ID);
 
-            echo '<li class="item-1 deeper parent">';
+            $html .=  '<li class="item-1 deeper parent">';
             $item++;
-            echo '<a href="' . base_url() . 'products/cat/' . $topcategorie->CATEGORIES_ID . '">';
+            $html .=  '<a href="' . base_url() . 'products/cat/' . $topcategorie->CATEGORIES_ID . '">';
             if ($subcategories != NULL) {
-                echo '<span data-toggle="collapse" data-parent="#menu-group-1" href="#sub-item-' . $item . '" class="sign"><i class="icon-plus icon-white"></i></span>';
+                $html .=  '<span data-toggle="collapse" data-parent="#menu-group-1" href="#sub-item-' . $item . '" class="sign"><i class="icon-plus icon-white"></i></span>';
             }
             else{
-                echo '<span class="blacked"><i class="icon-play"></i></span>';
+                $html .=  '<span class="blacked"><i class="icon-play"></i></span>';
             }
-            echo '<span class="lbl">' . $topcategorie->CATEGORIES_LABEL . '</span>';
-            echo '</a>';
+            $html .=  '<span class="lbl">' . $topcategorie->CATEGORIES_LABEL . '</span>';
+            $html .=  '</a>';
 
 
             if ($subcategories != NULL) {
-                echo '<ul class="children nav-child unstyled small collapse" id="sub-item-' . $item . '">';
+                $html .=  '<ul class="children nav-child unstyled small collapse" id="sub-item-' . $item . '">';
                 $item++;
                 foreach ($subcategories as $subcategorie) {
 
                     $subsubcategories = $this->categories_model->get_sub_categories($subcategorie->CATEGORIES_ID);
 
-                    echo '<li class="item-2 deeper parent">';
-                    echo '<a href="' . base_url() . 'products/cat/' . $subcategorie->CATEGORIES_ID . '">';
+                    $html .=  '<li class="item-2 deeper parent">';
+                    $html .=  '<a href="' . base_url() . 'products/cat/' . $subcategorie->CATEGORIES_ID . '">';
                     if ($subsubcategories != NULL) {
-                        echo '<span data-toggle="collapse" data-parent="#menu-group-1" href="#sub-item-' . $item . '" class="sign"><i class="icon-plus icon-white"></i></span>';
+                        $html .=  '<span data-toggle="collapse" data-parent="#menu-group-1" href="#sub-item-' . $item . '" class="sign"><i class="icon-plus icon-white"></i></span>';
                     }
                     else{
-                        echo '<span class="blacked"><i class="icon-play"></i></span>';
+                        $html .=  '<span class="blacked"><i class="icon-play"></i></span>';
                     }
-                    echo '<span class="lbl">' . $this->trunk($subcategorie->CATEGORIES_LABEL) . '</span> ';
-                    echo '</a>';
+                    $html .=  '<span class="lbl">' . $this->trunk($subcategorie->CATEGORIES_LABEL) . '</span> ';
+                    $html .=  '</a>';
 
                     if ($subsubcategories != NULL) {
-                        echo '<ul class="children nav-child unstyled small collapse" id="sub-item-' . $item . '">';
+                        $html .=  '<ul class="children nav-child unstyled small collapse" id="sub-item-' . $item . '">';
                         foreach ($subsubcategories as $subsubcategorie) {
-                            echo '<li class="item-' . $item . '">';
-                            echo '<a href="' . base_url() . 'products/cat/' . $subsubcategorie->CATEGORIES_ID . '">';
-                            echo '<span class="blacked"><i class="icon-play"></i></span>';
-                            echo '<span class="lbl">' . $this->trunk($subsubcategorie->CATEGORIES_LABEL) . '</span>';
-                            echo'</a>';
-                            echo'</li>';
+                            $html .=  '<li class="item-' . $item . '">';
+                            $html .=  '<a href="' . base_url() . 'products/cat/' . $subsubcategorie->CATEGORIES_ID . '">';
+                            $html .=  '<span class="blacked"><i class="icon-play"></i></span>';
+                            $html .=  '<span class="lbl">' . $this->trunk($subsubcategorie->CATEGORIES_LABEL) . '</span>';
+                            $html .= '</a>';
+                            $html .= '</li>';
                             $item++;
                         }
-                        echo '</ul>';
+                        $html .=  '</ul>';
                     }
-                    echo '</li>';
+                    $html .=  '</li>';
                     $index++;
                 }
-                echo '</ul>';
+                $html .=  '</ul>';
             }
-            echo '</li>';
+            $html .=  '</li>';
         }
-        echo '</ul>';
-
-        //$this->load->view('layouts/json_view', $data);
+        $html .=  '</ul>';
+        
+        $data['html'] = $html;
+        
+        $this->load->view('layouts/html_view', $data);
+        
+        $this->output->cache(60);
     }
 
     public function trunk($description) {
