@@ -2144,7 +2144,7 @@ footer .copy{
     display: inline-block;
     width: 25px;
     padding: 5px 8px;
-    background-color: transparent;
+    background-color: #51c3eb;
     color: #fff;
 }
 
@@ -2152,8 +2152,8 @@ footer .copy{
     display: inline-block;
     width: 25px;
     padding: 5px 8px;
-    background-color: transparent;
-    color: #000;
+    background-color: #51c3eb;
+    color: #0fa6bc;
 }
 
 #left ul.nav li.parent>a>.sign{
@@ -2179,17 +2179,18 @@ footer .copy{
 ------------------------- */
 /* theme 1 */
 #left ul.nav>li.item-1.parent>a {
-    border: solid 1px #ff6307;
+    border: solid 1px #51c3eb;
 }
 #left ul.nav>li.item-1.parent>a>.sign,
 #left ul.nav>li.item-1 li.parent>a>.sign{
     margin-left: 0px;
-    background-color: #ff6307;
+    background-color: #51c3eb;
 }
 #left ul.nav>li.item-1 .lbl {
-    color: #ff6307;
+    color: #51c3eb;
 }
 #left ul.nav>li.item-1 li.current>a .lbl {
-    background-color: #ff6307;
+    background-color: #51c3eb;
     color: #fff!important;
 }
+

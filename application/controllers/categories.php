@@ -34,6 +34,9 @@ class Categories extends CI_Controller {
             if ($subcategories != NULL) {
                 echo '<span data-toggle="collapse" data-parent="#menu-group-1" href="#sub-item-' . $item . '" class="sign"><i class="icon-plus icon-white"></i></span>';
             }
+            else{
+                echo '<span class="blacked"><i class="icon-play"></i></span>';
+            }
             echo '<span class="lbl">' . $topcategorie->CATEGORIES_LABEL . '</span>';
             echo '</a>';
 
@@ -49,6 +52,9 @@ class Categories extends CI_Controller {
                     echo '<a href="' . base_url() . 'products/cat/' . $subcategorie->CATEGORIES_ID . '">';
                     if ($subsubcategories != NULL) {
                         echo '<span data-toggle="collapse" data-parent="#menu-group-1" href="#sub-item-' . $item . '" class="sign"><i class="icon-plus icon-white"></i></span>';
+                    }
+                    else{
+                        echo '<span class="blacked"><i class="icon-play"></i></span>';
                     }
                     echo '<span class="lbl">' . $this->trunk($subcategorie->CATEGORIES_LABEL) . '</span> ';
                     echo '</a>';

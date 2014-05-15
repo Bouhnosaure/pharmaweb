@@ -58,7 +58,7 @@
             <div class="col-md-2 col-sm-2">
                 <!-- Logo -->
                 <div class="logo">
-                    <h1><a href="index.html">PharmaWeb</a></h1>
+                    <h1><a href="<?=base_url()?>">PharmaWeb</a></h1>
                 </div>
             </div>
             <div class="col-md-6 col-sm-5">
@@ -66,7 +66,7 @@
                 <div class="navi">
                     <div id="ddtopmenubar" class="mattblackmenu">
                         <ul>
-                            <li><a href="home">Home</a></li>
+                            <li><a href="<?=base_url()?>">Home</a></li>
                             <li><a href="<?= base_url() ?>products">Produits</a></li> 
                             <li><a href="#" rel="ddsubmenu1">Moi(nom)</a>
                                 <ul id="ddsubmenu1" class="ddsubmenustyle">

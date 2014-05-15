@@ -18,7 +18,7 @@ class Auth_model extends CI_Model {
         $this->load->database();
     }
 
-    public function testoracle() {
+    public function testoracle1() {
         //$query = $this->db->call_function('CONNECTION("test","root")');
         //$query = $this->db->query('call CONNECTION("test","root")');
         $id = "toto";
@@ -33,6 +33,28 @@ class Auth_model extends CI_Model {
         $query = ociexecute($stmt);
         oci_close($this->db->conn_id);
         return $query;
+    }
+
+    public function testoracleFunction($PRODUCT_ID) {
+
+        $stmt = OCIParse($this->db->conn_id, "SELECT PHARMAWEB.GETONEPRODUCT(:PARAM1) AS mfrc FROM dual ");
+        oci_bind_by_name($stmt, ':PARAM1', $PRODUCT_ID, 32);
+
+        OCIExecute($stmt);
+
+        $array = array();
+
+        while (($row = oci_fetch_array($stmt, OCI_ASSOC))) {
+            $rc = $row['MFRC'];
+            $i = 1;
+            OCIExecute($rc);
+            while (($rc_row = oci_fetch_array($rc, OCI_ASSOC))) {
+                $array[$i] = $rc_row;
+                $i++;
+            }
+        }
+
+        return $array;
     }
 
 }

@@ -19,8 +19,19 @@ class Products_model extends CI_Model {
     }
 
     public function products_count() {
-        return $this->db->count_all("PRODUCTS");
-        oci_close($this->db->conn_id);
+        $stmt = OCIParse($this->db->conn_id, "SELECT PHARMAWEB.PRODUCTS_PACK.GET_NUMBER_PRODUCT() AS mfrc FROM dual ");
+        OCIExecute($stmt);
+        $array = array();
+        while (($row = oci_fetch_array($stmt, OCI_ASSOC))) {
+            $rc = $row['MFRC'];
+            $i = 1;
+            OCIExecute($rc);
+            while (($rc_row = oci_fetch_array($rc, OCI_ASSOC))) {
+                $array[$i] = $rc_row;
+                $i++;
+            }
+        }
+        return $array[1]['COUNT(PRODUCTS_ID)'];
     }
 
     public function products_cat_count($id = null) {
@@ -30,30 +41,21 @@ class Products_model extends CI_Model {
     }
 
     public function get_products_limit($limit, $start) {
-        $this->db->limit($limit, $start);
-        $query = $this->db->get("PRODUCTS");
-
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                $data[] = $row;
+        $stmt = OCIParse($this->db->conn_id, "SELECT PHARMAWEB.PRODUCTS_PACK.GET_ALL_PRODUCT(:PARAM1,:PARAM2) AS mfrc FROM dual ");
+        oci_bind_by_name($stmt, ':PARAM1', $limit, 32);
+        oci_bind_by_name($stmt, ':PARAM2', $start, 32);
+        OCIExecute($stmt);
+        $array = array();
+        while (($row = oci_fetch_array($stmt, OCI_ASSOC))) {
+            $rc = $row['MFRC'];
+            $i = 1;
+            OCIExecute($rc);
+            while (($rc_row = oci_fetch_array($rc, OCI_ASSOC))) {
+                $array[$i] = $rc_row;
+                $i++;
             }
-            return $data;
         }
-        oci_close($this->db->conn_id);
-        return false;
-    }
-
-    public function get_products() {
-        $query = $this->db->get("PRODUCTS");
-
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                $data[] = $row;
-            }
-            return $data;
-        }
-        oci_close($this->db->conn_id);
-        return false;
+        return $array;
     }
 
     public function get_product_by_cat($limit, $start, $id = null) {
@@ -72,18 +74,20 @@ class Products_model extends CI_Model {
     }
 
     public function get_product($id = null) {
-        $this->db->where('PRODUCTS_ID', $id);
-        $query = $this->db->get("PRODUCTS");
-
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                $data[] = $row;
+        $stmt = OCIParse($this->db->conn_id, "SELECT PHARMAWEB.PRODUCTS_PACK.GET_ONE_PRODUCT(:PARAM1) AS mfrc FROM dual ");
+        oci_bind_by_name($stmt, ':PARAM1', $id, 32);
+        OCIExecute($stmt);
+        $array = array();
+        while (($row = oci_fetch_array($stmt, OCI_ASSOC))) {
+            $rc = $row['MFRC'];
+            $i = 1;
+            OCIExecute($rc);
+            while (($rc_row = oci_fetch_array($rc, OCI_ASSOC))) {
+                $array[$i] = $rc_row;
+                $i++;
             }
-            return $data;
         }
-        oci_close($this->db->conn_id);
-        return false;
+        return $array;
     }
-
 
 }

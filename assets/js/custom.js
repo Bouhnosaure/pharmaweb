@@ -143,5 +143,8 @@ $(document).ready(function() {
         }
     });
 });
-
-
+$(document).ready(function() {
+    $("#buttonsubmit").click(function() {
+        $("#addtocart").submit();
+    });
+});

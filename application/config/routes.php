@@ -50,9 +50,12 @@ $route['products'] = "products/index";
 $route['products/(:num)'] = "products/index/$1";
 $route['products/cat/(:num)'] = "products/cat/$1";
 $route['products/cat/(:num)/(:num)'] = "products/cat/$1/$2";
+$route['products/detail/(:num)'] = "products/detail/$1";
 
 $route['categories'] = "home/notfound";
 $route['categories_json'] = "categories/index";
+
+$route['cart'] = "cart/index";
 
 $route['assets/(:any)'] = 'assets/$1';
 $route['404_override'] = 'home/notfound';
