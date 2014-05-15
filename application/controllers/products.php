@@ -38,11 +38,11 @@ class Products extends CI_Controller {
 
         $config['base_url'] = base_url() . 'products/cat/' . $cat . '/';
         $config['total_rows'] = $this->products_model->products_cat_count($cat);
-        $config['per_page'] = 8;
+        $config['per_page'] = 9;
         $config['uri_segment'] = 4;
 
         $this->pagination->initialize($config);
-        $data["products"] = $this->products_model->get_product_by_cat($config["per_page"], $page, $cat);
+        $data["products"] = $this->products_model->get_product_by_cat($page,$page+$config["per_page"]-1, $cat);
         $data['links'] = $this->pagination->create_links();
 
         $this->load->view('layouts/products/all', $data);

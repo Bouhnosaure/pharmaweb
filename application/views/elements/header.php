@@ -56,14 +56,13 @@
                 <div class="navi">
                     <div id="ddtopmenubar" class="mattblackmenu">
                         <ul>
-                            <li><a href="<?= base_url() ?>">Home</a></li>
-                            <li><a href="<?= base_url() ?>products">Produits</a></li> 
+                            <li><a href="<?=site_url("home")?>">Home</a></li>
+                            <li><a href="<?=site_url("products")?>">Produits</a></li> 
                             <li><a href="#" rel="ddsubmenu1">Moi(nom)</a>
                                 <ul id="ddsubmenu1" class="ddsubmenustyle">
-                                    <li><a href="account.html">Mon Compte</a></li>
-                                    <li><a href="viewcart.html">Voir le panier</a></li>
-                                    <li><a href="orderhistory.html">Historique des achats</a></li>
-                                    <li><a href="editprofile.html">Editer mon profil</a></li>
+                                    <li><a href="<?=site_url("user")?>">Mon Compte</a></li>
+                                    <li><a href="<?=site_url("cart")?>">Voir le panier</a></li>
+                                    <li><a href="<?=site_url("user/edit")?>">Editer mon profil</a></li>
 
 
                                 </ul>
@@ -81,8 +80,8 @@
 
             <div class="col-md-4 col-sm-5">
                 <div class="kart-links">
-                    <a href="login.html">Connexion</a> 
-                    <a href="register.html">S'enregistrer</a>
+                    <a href="<?=site_url("user/login")?>">Connexion</a> 
+                    <a href="<?=site_url("user/register")?>">S'enregistrer</a>
                     <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> Total: <?= $this->cart->total() ?>€</a>
                 </div>
             </div>

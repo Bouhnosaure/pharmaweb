@@ -16,6 +16,7 @@
         <div class="shop-items">
             <div class="container">
                 <div class="row">
+                    
                     <?php if ($products != false): ?>
 
                         <div class="col-md-9 col-md-push-3">

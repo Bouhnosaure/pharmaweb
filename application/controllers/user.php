@@ -8,50 +8,47 @@ if (!defined('BASEPATH'))
  *
  * @author Alex
  */
-class User extends CI_Model {
+class User extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('auth_model');
     }
-
+    
+    //account
     public function index() {
-
-        $this->load->view();
+        //if(!$userislogged){redirect('/user/login', 'refresh');}
+        
+        $this->load->view('layouts/auth/account');
     }
 
     public function login() {
-
-        $this->load->view();
+        
+        $this->load->view('layouts/auth/login');
     }
 
     public function logout() {
 
-        $this->load->view();
+        $this->load->view('layouts/auth/login');
     }
 
     public function register() {
-
-        $this->load->view();
+        
+        $this->load->view('layouts/auth/register');
     }
 
-    public function verify($token) {
+    public function reset() {
 
-        $this->load->view();
+        $this->load->view('layouts/auth/resetpassword');
     }
 
-    public function reset($token) {
+    public function edit() {
 
-        $this->load->view();
+        $this->load->view('layouts/auth/edit');
     }
+    
+    public function exist() {
 
-    public function edit($user) {
-
-        $this->load->view();
+        return;
     }
-
-    public function search($user) {
-
-        $this->load->view();
-    }
-
 }

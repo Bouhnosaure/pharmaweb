@@ -32,11 +32,25 @@ class Products_model extends CI_Model {
             }
         }
         return $array[1]['COUNT(PRODUCTS_ID)'];
+        oci_close($this->db->conn_id);
     }
 
-    public function products_cat_count($id = null) {
-        $this->db->where('CATEGORIES_ID', $id);
-        return $this->db->count_all("PRODUCTS");
+    public function products_cat_count($id = 0) {
+        $stmt = OCIParse($this->db->conn_id, "SELECT  PHARMAWEB.PRODUCTS_PACK.GET_NUMBER_PRODUCT_BY_CAT(:PARAM1) AS mfrc FROM dual ");
+        oci_bind_by_name($stmt, ':PARAM1', $id, 32);
+        OCIExecute($stmt);
+        $array = array();
+        while (($row = oci_fetch_array($stmt, OCI_ASSOC))) {
+            $rc = $row['MFRC'];
+            $i = 1;
+            OCIExecute($rc);
+            while (($rc_row = oci_fetch_array($rc, OCI_ASSOC))) {
+                $array[$i] = $rc_row;
+                $i++;
+            }
+        }
+        return $array[1]['COUNT(PRODUCTS_ID)'];
+
         oci_close($this->db->conn_id);
     }
 
@@ -55,22 +69,30 @@ class Products_model extends CI_Model {
                 $i++;
             }
         }
+        
         return $array;
+        oci_close($this->db->conn_id);
     }
 
     public function get_product_by_cat($limit, $start, $id = null) {
-        $this->db->where('CATEGORIES_ID', $id);
-        $this->db->limit($limit, $start);
-        $query = $this->db->get("PRODUCTS");
-
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                $data[] = $row;
+        $stmt = OCIParse($this->db->conn_id, "SELECT PHARMAWEB.PRODUCTS_PACK.GET_ALL_PRODUCT_BY_CATEGORIE(:PARAM1,:PARAM2,:PARAM3) AS mfrc FROM dual ");
+        oci_bind_by_name($stmt, ':PARAM1', $id, 32);
+        oci_bind_by_name($stmt, ':PARAM2', $limit, 32);
+        oci_bind_by_name($stmt, ':PARAM3', $start, 32);
+        OCIExecute($stmt);
+        
+        $array = array();
+        while (($row = oci_fetch_array($stmt, OCI_ASSOC))) {
+            $rc = $row['MFRC'];
+            $i = 1;
+            OCIExecute($rc);
+            while (($rc_row = oci_fetch_array($rc, OCI_ASSOC))) {
+                $array[$i] = $rc_row;
+                $i++;
             }
-            return $data;
         }
+        return $array;
         oci_close($this->db->conn_id);
-        return false;
     }
 
     public function get_product($id = null) {
@@ -88,6 +110,7 @@ class Products_model extends CI_Model {
             }
         }
         return $array;
+        oci_close($this->db->conn_id);
     }
 
 }

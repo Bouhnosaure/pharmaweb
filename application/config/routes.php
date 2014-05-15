@@ -57,6 +57,14 @@ $route['categories_json'] = "categories/index";
 
 $route['cart'] = "cart/index";
 
+$route['user'] = "user/index";
+$route['user/login'] = "user/login";
+$route['user/logout'] = "user/logout";
+$route['user/register'] = "user/register";
+$route['user/resetpassword'] = "user/reset";
+$route['user/edit'] = "user/edit";
+
+
 $route['assets/(:any)'] = 'assets/$1';
 $route['404_override'] = 'home/notfound';
 
