@@ -26,7 +26,7 @@ class Auth_model extends CI_Model {
         
     }
 
-    public function create_user($name, $surname, $mail, $password, $fixnumber, $mobilenumber, $adress, $adresscomp, $cp, $mutual, $secu, $gender, $birth) {
+    public function create_user($user) {
 
 
         $role_id = 1;
@@ -35,23 +35,23 @@ class Auth_model extends CI_Model {
         $activated = 1;
         $city_ID = 23;
 
-        $stmt = OCIParse($this->db->conn_id, "begin :ret  := PHARMAWEB.USERS_PACK.CREATE_USER(:PARAM1,:PARAM2,:PARAM3,:PARAM4,:PARAM5,:PARAM6,:PARAM7,:PARAM8,:PARAM9,:PARAM10,:PARAM11,:PARAM12,:PARAM13,:PARAM14,:PARAM15); END; ");
+        $stmt = OCIParse($this->db->conn_id, "begin :ret  := PHARMAWEB.USERS_PACK.CREATE_USER(:PARAM1,:PARAM2,:PARAM3,:PARAM4,:PARAM5,:PARAM6,:PARAM7,:PARAM8,:PARAM9,:PARAM10,:PARAM11,:PARAM12,:PARAM13,:PARAM14,:PARAM15,:PARAM16); END; ");
 
         oci_bind_by_name($stmt, ':PARAM1', $role_id, 32);
-        oci_bind_by_name($stmt, ':PARAM2', $mutualid, 32);
-        oci_bind_by_name($stmt, ':PARAM3', $name, 32);
-        oci_bind_by_name($stmt, ':PARAM4', $surname, 32);
-        oci_bind_by_name($stmt, ':PARAM5', $password, 32);
-        oci_bind_by_name($stmt, ':PARAM6', $secu, 32);
-        oci_bind_by_name($stmt, ':PARAM7', $fixnumber, 32);
-        oci_bind_by_name($stmt, ':PARAM8', $mobilenumber, 32);
-        oci_bind_by_name($stmt, ':PARAM9', $mail, 32);
+        oci_bind_by_name($stmt, ':PARAM2', $user['mutualcenterid'], 32);
+        oci_bind_by_name($stmt, ':PARAM3', $user['name'], 32);
+        oci_bind_by_name($stmt, ':PARAM4', $user['surname'], 32);
+        oci_bind_by_name($stmt, ':PARAM5', $user['password'], 32);
+        oci_bind_by_name($stmt, ':PARAM6', $user['secu'], 32);
+        oci_bind_by_name($stmt, ':PARAM7', $user['mutualcenterid'], 32);
+        oci_bind_by_name($stmt, ':PARAM8', $user['mutualcenterid'], 32);
+        oci_bind_by_name($stmt, ':PARAM9', $user['mutualcenterid'], 32);
         oci_bind_by_name($stmt, ':PARAM10', $valid, 32);
         oci_bind_by_name($stmt, ':PARAM11', $activated, 32);
-        oci_bind_by_name($stmt, ':PARAM12', $gender, 32);
-        oci_bind_by_name($stmt, ':PARAM13', $city_ID, 32);
-        oci_bind_by_name($stmt, ':PARAM14', $adress, 32);
-        oci_bind_by_name($stmt, ':PARAM15', $adresscomp, 32);
+        oci_bind_by_name($stmt, ':PARAM12', $user['mutualcenterid'], 32);
+        oci_bind_by_name($stmt, ':PARAM13', $user['mutualcenterid'], 32);
+        oci_bind_by_name($stmt, ':PARAM14', $user['mutualcenterid'], 32);
+        oci_bind_by_name($stmt, ':PARAM15', $user['mutualcenterid'], 32);
         oci_bind_by_name($stmt, ':ret', $r, 200);
 
         $result = OCIExecute($stmt);

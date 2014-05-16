@@ -155,7 +155,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Mutuelle</label>
+                                        <label class="col-sm-3 control-label">Centres de mutuelle</label>
                                         <div class="col-sm-9">
                                             <input id="mutualcenterid" type="hidden" name="mutualcenterid">
                                             <select id="mutualcenter" name="mutualcenter" class="form-control"></select>
@@ -187,7 +187,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Date de naissance (au format jour/mois/année)</label>
                                         <div class="col-sm-9">
-                                            <input type="text" data-mask="date" class="form-control" placeholder="JJ/MM/AAAA" />
+                                            <input type="text" data-mask="date" name="birth" class="form-control" placeholder="JJ/MM/AAAA" />
                                         </div>
                                     </div>
                                     <hr class="colorgraph">	
@@ -244,6 +244,7 @@
                                     html += '<option value="' + mutualscentersdata[i].id + '">' + mutualscentersdata[i].value + '</option>';
                                 }
                                 $('#mutualcenter').append(html);
+                                $('#mutualcenterid').val($( "#mutualcenter" ).val());
                             })
                         },
                         html: true, // optional (jquery.ui.autocomplete.html.js required)
@@ -253,7 +254,12 @@
                             $(".ui-autocomplete").css("z-index", 1000);
                         }
                     });
+
+
                 });
+
+
+
 
                 $(document).ready(function() {
 
@@ -300,6 +306,14 @@
                         });
                     });
                 });
+
+                $(document).ready(function() {
+                    $('#mutualcenter').on('change', function() {
+                        $('#mutualcenterid').val(this.value);
+                    });
+                });
+
+
             </script> 
     </body>
 

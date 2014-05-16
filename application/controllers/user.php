@@ -23,8 +23,8 @@ class User extends CI_Controller {
     }
 
     public function login() {
-
-        $this->load->view('layouts/auth/login');
+        echo TRUE + FALSE;
+        //$this->load->view('layouts/auth/login');
     }
 
     public function logout() {
@@ -33,39 +33,26 @@ class User extends CI_Controller {
     }
 
     public function register() {
-        if (isset($_POST['name']) 
-                && isset($_POST['surname']) 
-                && isset($_POST['mail']) 
-                && isset($_POST['password']) 
-                && isset($_POST['fixnumber'])
-                && isset($_POST['mobilenumber']) 
-                && isset($_POST['adress']) 
-                && isset($_POST['adresscomp']) 
-                && isset($_POST['cp']) 
-                && isset($_POST['mutual'])
-                && isset($_POST['secu'])
-                && isset($_POST['gender'])
-                && isset($_POST['naiss'])
-                ) {
-                $statut = $this->auth_model->create_user($_POST['name'],
-                        $_POST['surname'],
-                        $_POST['mail'],
-                        $_POST['password'],
-                        $_POST['fixnumber'],
-                        $_POST['mobilenumber'],
-                        $_POST['adress'],
-                        $_POST['adresscomp'],
-                        $_POST['cp'],
-                        $_POST['mutual'],
-                        $_POST['secu'],
-                        $_POST['gender'],
-                        $_POST['naiss']
-                        );
-                        var_dump($statut);
-        }  else {
-          $this->load->view('layouts/auth/register');  
+        $bool = NULL;
+
+        $inorderfields = array('name', 'surname', 'mail', 'password', 'fixnumber', 'mobilenumber', 'adress', 'adresscomp', 'villeid', 'ville', 'mutualid', 'mutual', 'mutualcenterid', 'secu', 'gender', 'birth');
+        $inordervalues = array();
+
+        foreach ($inorderfields as $field) {
+            $bool = $bool + isset($_POST[$field]);
+            array_push($inordervalues, $_POST[$field]);
         }
-        
+        $user = array_combine($inorderfields, $inordervalues);
+        var_dump($user);
+
+        if ($bool >= 15) {
+            $statut = $this->auth_model->create_user($user);
+            var_dump($statut);
+        } else {
+            $this->load->view('layouts/auth/register');
+        }
+
+        $this->load->view('layouts/auth/register');
     }
 
     public function reset() {
