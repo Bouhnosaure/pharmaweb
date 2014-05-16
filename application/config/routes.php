@@ -66,6 +66,8 @@ $route['user/edit'] = "user/edit";
 
 $route['autocomplete/cities'] = "autocomplete/cities";
 $route['autocomplete/mutuals'] = "autocomplete/mutuals";
+$route['autocomplete/medics'] = "autocomplete/medics";
+$route['autocomplete/mutualscenters'] = "autocomplete/mutualscenters";
 
 $route['assets/(:any)'] = 'assets/$1';
 $route['404_override'] = 'home/notfound';

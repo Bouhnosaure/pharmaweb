@@ -25,6 +25,12 @@ class Autocomplete extends CI_Controller {
         }
     }
 
+    public function mutualscenters() {
+        if (isset($_GET['term'])) {
+            echo $this->autocomplete_model->get_mutuals_centers(humanize($_GET['term']));
+        }
+    }
+
     public function medics() {
         if (isset($_GET['term'])) {
             echo $this->autocomplete_model->get_medics(humanize($_GET['term']));

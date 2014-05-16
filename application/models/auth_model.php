@@ -26,14 +26,18 @@ class Auth_model extends CI_Model {
         
     }
 
-    public function create_user($name, $surname, $mail, $password, $fixnumber, $mobilenumber, $adress, $adresscomp, $cp, $mutual, $secu, $gender,$birth) {
-        $role=1;
+    public function create_user($name, $surname, $mail, $password, $fixnumber, $mobilenumber, $adress, $adresscomp, $cp, $mutual, $secu, $gender, $birth) {
+
+
+        $role_id = 1;
         $mutualid = 1;
-        $villeid= 50;
-        
-        $stmt = OCIParse($this->db->conn_id, "SELECT PHARMAWEB.USERS_PACK.CREATE_USER(:PARAM1,:PARAM2,:PARAM3,:PARAM4,:PARAM5,:PARAM6,:PARAM7,:PARAM8,:PARAM9,:PARAM10,:PARAM11,:PARAM12,:PARAM13,:PARAM14,:PARAM15) AS mfrc FROM dual ");
-        
-        oci_bind_by_name($stmt, ':PARAM1', $role, 32);
+        $valid = 1;
+        $activated = 1;
+        $city_ID = 23;
+
+        $stmt = OCIParse($this->db->conn_id, "begin :ret  := PHARMAWEB.USERS_PACK.CREATE_USER(:PARAM1,:PARAM2,:PARAM3,:PARAM4,:PARAM5,:PARAM6,:PARAM7,:PARAM8,:PARAM9,:PARAM10,:PARAM11,:PARAM12,:PARAM13,:PARAM14,:PARAM15); END; ");
+
+        oci_bind_by_name($stmt, ':PARAM1', $role_id, 32);
         oci_bind_by_name($stmt, ':PARAM2', $mutualid, 32);
         oci_bind_by_name($stmt, ':PARAM3', $name, 32);
         oci_bind_by_name($stmt, ':PARAM4', $surname, 32);
@@ -42,27 +46,19 @@ class Auth_model extends CI_Model {
         oci_bind_by_name($stmt, ':PARAM7', $fixnumber, 32);
         oci_bind_by_name($stmt, ':PARAM8', $mobilenumber, 32);
         oci_bind_by_name($stmt, ':PARAM9', $mail, 32);
-        oci_bind_by_name($stmt, ':PARAM10', $birth, 32);
-        oci_bind_by_name($stmt, ':PARAM11', $gender, 32);
-        oci_bind_by_name($stmt, ':PARAM12', $villeid, 32);
-        oci_bind_by_name($stmt, ':PARAM13', $adress, 32);
-        oci_bind_by_name($stmt, ':PARAM14', $adresscomp, 32);
-        oci_bind_by_name($stmt, ':PARAM15', $role, 32);
-        
-        
-        OCIExecute($stmt);
-        
-        $array = array();
-        while (($row = oci_fetch_array($stmt, OCI_ASSOC))) {
-            $rc = $row['MFRC'];
-            $i = 1;
-            OCIExecute($rc);
-            while (($rc_row = oci_fetch_array($rc, OCI_ASSOC))) {
-                $array[$i] = $rc_row;
-                $i++;
-            }
-        }
+        oci_bind_by_name($stmt, ':PARAM10', $valid, 32);
+        oci_bind_by_name($stmt, ':PARAM11', $activated, 32);
+        oci_bind_by_name($stmt, ':PARAM12', $gender, 32);
+        oci_bind_by_name($stmt, ':PARAM13', $city_ID, 32);
+        oci_bind_by_name($stmt, ':PARAM14', $adress, 32);
+        oci_bind_by_name($stmt, ':PARAM15', $adresscomp, 32);
+        oci_bind_by_name($stmt, ':ret', $r, 200);
 
+        $result = OCIExecute($stmt);
+        var_dump($result);
+        var_dump($r);
+
+        $array = null;
         return $array;
         oci_close($this->db->conn_id);
     }
