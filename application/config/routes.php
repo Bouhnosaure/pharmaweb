@@ -63,6 +63,8 @@ $route['user/logout'] = "user/logout";
 $route['user/register'] = "user/register";
 $route['user/resetpassword'] = "user/reset";
 $route['user/edit'] = "user/edit";
+$route['user/success'] = "user/success";
+
 
 $route['autocomplete/cities'] = "autocomplete/cities";
 $route['autocomplete/mutuals'] = "autocomplete/mutuals";

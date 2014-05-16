@@ -43,23 +43,20 @@ class Auth_model extends CI_Model {
         oci_bind_by_name($stmt, ':PARAM4', $user['surname'], 32);
         oci_bind_by_name($stmt, ':PARAM5', $user['password'], 32);
         oci_bind_by_name($stmt, ':PARAM6', $user['secu'], 32);
-        oci_bind_by_name($stmt, ':PARAM7', $user['mutualcenterid'], 32);
-        oci_bind_by_name($stmt, ':PARAM8', $user['mutualcenterid'], 32);
-        oci_bind_by_name($stmt, ':PARAM9', $user['mutualcenterid'], 32);
-        oci_bind_by_name($stmt, ':PARAM10', $valid, 32);
-        oci_bind_by_name($stmt, ':PARAM11', $activated, 32);
-        oci_bind_by_name($stmt, ':PARAM12', $user['mutualcenterid'], 32);
-        oci_bind_by_name($stmt, ':PARAM13', $user['mutualcenterid'], 32);
-        oci_bind_by_name($stmt, ':PARAM14', $user['mutualcenterid'], 32);
-        oci_bind_by_name($stmt, ':PARAM15', $user['mutualcenterid'], 32);
+        oci_bind_by_name($stmt, ':PARAM7', $user['fixnumber'], 32);
+        oci_bind_by_name($stmt, ':PARAM8', $user['mobilenumber'], 32);
+        oci_bind_by_name($stmt, ':PARAM9', $user['mail'], 32);
+        oci_bind_by_name($stmt, ':PARAM10', $birth, 32);
+        oci_bind_by_name($stmt, ':PARAM11', $valid, 32);
+        oci_bind_by_name($stmt, ':PARAM12', $activated, 32);
+        oci_bind_by_name($stmt, ':PARAM13', $user['gender'], 32);
+        oci_bind_by_name($stmt, ':PARAM14', $user['villeid'], 32);
+        oci_bind_by_name($stmt, ':PARAM15', $user['adress'], 32);
+        oci_bind_by_name($stmt, ':PARAM16', $user['adresscomp'], 32);
         oci_bind_by_name($stmt, ':ret', $r, 200);
 
         $result = OCIExecute($stmt);
-        var_dump($result);
-        var_dump($r);
-
-        $array = null;
-        return $array;
+        return $r;
         oci_close($this->db->conn_id);
     }
 

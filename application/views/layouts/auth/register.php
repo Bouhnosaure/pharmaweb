@@ -39,6 +39,12 @@
         <div class="container">
             <div class="row wizard-row">
                 <div class="col-md-12 fuelux">
+                    <?php $message = $this->session->flashdata('message'); ?>
+                    <?php if (!empty($message)): ?>
+                        <div class="alert alert-error">
+                            <a class="close" data-dismiss="alert" href="#">×</a><?= $message ?>
+                        </div>
+                    <?php endif; ?>
                     <div class="block-wizard">
                         <div id="wizard1" class="wizard wizard-ux">
                             <ul class="steps">
@@ -244,7 +250,7 @@
                                     html += '<option value="' + mutualscentersdata[i].id + '">' + mutualscentersdata[i].value + '</option>';
                                 }
                                 $('#mutualcenter').append(html);
-                                $('#mutualcenterid').val($( "#mutualcenter" ).val());
+                                $('#mutualcenterid').val($("#mutualcenter").val());
                             })
                         },
                         html: true, // optional (jquery.ui.autocomplete.html.js required)
