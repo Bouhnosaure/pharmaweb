@@ -25,7 +25,7 @@ class User extends CI_Controller {
     public function login() {
         if ($this->input->post()) {
             
-        }
+        
         }
         $this->load->view('layouts/auth/login');
     }
@@ -46,6 +46,7 @@ class User extends CI_Controller {
                 array_push($inordervalues, $_POST[$field]);
             }
             $user = array_combine($inorderfields, $inordervalues);
+            
             if ($bool < 1) {
                 $statut = $this->auth_model->create_user($user);
                 if ($statut == 1) {

@@ -41,7 +41,7 @@
                 <div class="col-md-12 fuelux">
                     <?php $message = $this->session->flashdata('message'); ?>
                     <?php if (!empty($message)): ?>
-                        <div class="alert alert-error">
+                        <div class="alert alert-danger alert-dismissable">
                             <a class="close" data-dismiss="alert" href="#">×</a><?= $message ?>
                         </div>
                     <?php endif; ?>
@@ -71,31 +71,31 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Nom</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="name" class="form-control" placeholder="Nom">
+                                            <input type="text" name="name" class="form-control" placeholder="Nom" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Prenom</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="surname" class="form-control" placeholder="Prenom">
+                                            <input type="text" name="surname" class="form-control" placeholder="Prenom" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">E-Mail</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="mail" class="form-control" placeholder="E-Mail">
+                                            <input type="text" name="mail" class="form-control" placeholder="E-Mail" required>
                                         </div>
                                     </div>	
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Mot de passe</label>
                                         <div class="col-sm-9">
-                                            <input type="password" name="password" class="form-control" placeholder="Entrez votre mot de passe">
+                                            <input type="password" name="password" class="form-control" placeholder="Entrez votre mot de passe" required>
                                         </div>
                                     </div>		
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Verification du mot de passe</label>
                                         <div class="col-sm-9">
-                                            <input type="password" class="form-control" placeholder="Entrez votre mot de passe encore">
+                                            <input type="password-confirm" class="form-control" placeholder="Entrez votre mot de passe encore" required>
                                         </div>
                                     </div>
                                     <hr class="colorgraph">									
@@ -111,19 +111,19 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Téléphone Fixe</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="fixnumber" data-mask="phone" class="form-control" placeholder="Téléphone Fixe">
+                                            <input type="text" name="fixnumber" data-mask="phone" class="form-control" placeholder="Téléphone Fixe" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Téléphone Mobile</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="mobilenumber" data-mask="phone" class="form-control" placeholder="Téléphone Mobile">
+                                            <input type="text" name="mobilenumber" data-mask="phone" class="form-control" placeholder="Téléphone Mobile" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Adresse</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="adress" class="form-control" placeholder="Adresse">
+                                            <input type="text" name="adress" class="form-control" placeholder="Adresse" required>
                                         </div>
                                     </div>	
                                     <div class="form-group">
@@ -137,7 +137,7 @@
                                             <label class="col-sm-3 control-label">Ville</label>
                                             <div class="col-sm-9">
                                                 <input id="villeid" type="hidden" name="villeid">
-                                                <input id="ville" type="text" name="ville" data-mask="ville" class="form-control" placeholder="Ville">
+                                                <input id="ville" type="text" name="ville" data-mask="ville" class="form-control" placeholder="Ville" required>
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@
                                             <label class="col-sm-3 control-label">Mutuelle</label>
                                             <div class="col-sm-9">
                                                 <input id="mutualid" type="hidden" name="mutualid">
-                                                <input type="text" id="mutual" name="mutual" class="form-control" placeholder="Mutuelle">
+                                                <input type="text" id="mutual" name="mutual" class="form-control" placeholder="Mutuelle" required >
                                             </div>
                                         </div>
                                     </div>
@@ -170,7 +170,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Numéro de sécurité sociale</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="secu" data-mask="secu" class="form-control" placeholder="Numero de securité sociale">
+                                            <input type="text" name="secu" data-mask="secu" class="form-control" placeholder="Numero de securité sociale" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -193,7 +193,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Date de naissance (au format jour/mois/année)</label>
                                         <div class="col-sm-9">
-                                            <input type="text" data-mask="date" name="birth" class="form-control" placeholder="JJ/MM/AAAA" />
+                                            <input type="text" data-mask="date" name="birth" class="form-control" placeholder="JJ/MM/AAAA" required/>
                                         </div>
                                     </div>
                                     <hr class="colorgraph">	
@@ -284,6 +284,7 @@
                         $('.bslider').slider();
                     });
                     $(".wizard-next").click(function(e) {
+                        $("#wizardform").validate();
                         var id = $(this).data("wizard");
                         $(id).wizard('next');
                         e.preventDefault();
@@ -318,8 +319,6 @@
                         $('#mutualcenterid').val(this.value);
                     });
                 });
-
-
             </script> 
     </body>
 
