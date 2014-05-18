@@ -17,31 +17,19 @@
                             <th>Prix</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php foreach ($this->cart->contents() as $product): ?>
-                            <tr>
-                                <!-- Product  name -->
-                                <td><a href="<?= base_url() . 'products/detail/' . $product['id'] ?>"><?= $product['name'] ?></a></td>
-                                <!-- Quantity with refresh and remove button -->
-                                <td><?= $product['qty'] ?></td>
-                                <!-- Unit price -->
-                                <td><?= $product['price'] ?>€</td>
-                            </tr>
-                        <?php endforeach; ?>
+                    <tbody id="cartable">
+
                     </tbody>
                 </table>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Poursuivre mes achats</button>
-                <a type="button" class="btn btn-info" href="<?=  base_url()?>cart">Commander</a>
+                <a type="button" class="btn btn-info" href="<?= base_url() ?>cart">Commander</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-<!-- Logo & Navigation starts -->
-
 <div class="header">
     <div class="container">
         <div class="row">
@@ -56,18 +44,17 @@
                 <div class="navi">
                     <div id="ddtopmenubar" class="mattblackmenu">
                         <ul>
-                            <li><a href="<?=site_url("home")?>">Home</a></li>
-                            <li><a href="<?=site_url("products")?>">Produits</a></li> 
-                            <li><a href="#" rel="ddsubmenu1">Moi(nom)</a>
-                                <ul id="ddsubmenu1" class="ddsubmenustyle">
-                                    <li><a href="<?=site_url("user")?>">Mon Compte</a></li>
-                                    <li><a href="<?=site_url("cart")?>">Voir le panier</a></li>
-                                    <li><a href="<?=site_url("user/edit")?>">Editer mon profil</a></li>
-
-
-                                </ul>
-                            </li>
-
+                            <li><a href="<?= site_url("home") ?>">Home</a></li>
+                            <li><a href="<?= site_url("products") ?>">Produits</a></li>
+                            <?php if ($this->session->userdata('USERS_ID') != FALSE): ?>
+                                <li><a href="#" rel="ddsubmenu1">Mon compte</a>
+                                    <ul id="ddsubmenu1" class="ddsubmenustyle">
+                                        <li><a href="<?= site_url("user") ?>">Mon Compte</a></li>
+                                        <li><a href="<?= site_url("cart") ?>">Voir le panier</a></li>
+                                        <li><a href="<?= site_url("user/edit") ?>">Editer mon profil</a></li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
                             <li><a href="contactus.html">Contact</a></li>
                             <li><a href="aboutus.html">A Propos</a></li>
                         </ul>
@@ -80,13 +67,38 @@
 
             <div class="col-md-4 col-sm-5">
                 <div class="kart-links">
-                    <a href="<?=site_url("user/login")?>">Connexion</a> 
-                    <a href="<?=site_url("user/register?op1=on&op1=on&op1=on#")?>">S'enregistrer</a>
-                    <a data-toggle="modal" href="#shoppingcart"><i class="icon-shopping-cart"></i> Total: <?= $this->cart->total() ?>€</a>
+                    <?php if ($this->session->userdata('USERS_ID') != FALSE): ?>
+                        <a href="<?= site_url("user") ?>"><?= $this->session->userdata('USERS_LASTNAME'); ?></a>
+                        <a href="<?= site_url("user/logout") ?>">Déconnexion</a> 
+                    <?php else: ?>
+                        <a href="<?= site_url("user/login") ?>">Connexion</a> 
+                        <a href="<?= site_url("user/register?op1=on&op1=on&op1=on#") ?>">S'enregistrer</a>
+                    <?php endif; ?>
+                    <a data-toggle="modal" href="#shoppingcart" id="totallink"><i class="icon-shopping-cart"></i></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        updatecartview();
+    });
 
+    function updatecartview() {
+        $("#cartable").empty();
+
+        $.getJSON("<?= base_url() ?>cart/getcart", function(data) {
+            $.each(data, function() {
+                console.log(this);
+                var row = $('<tr><td><a href="<?= base_url() ?>products/detail/' + this.id + '">' + this.name + '</a></td><td>' + this.qty + '</td><td>' + this.price + '€</td></tr>');
+                $("#cartable").append(row);
+
+            });
+        });
+        $.get("<?= base_url() ?>cart/gettotal", function(data) {
+            $("#totallink").html("Total: " + data + "€");
+        });
+    }
+</script>
 

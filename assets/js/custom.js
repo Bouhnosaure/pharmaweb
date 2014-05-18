@@ -146,12 +146,14 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#buttonsubmit").click(function() {
         $("#addtocart").submit();
+        updatecartview();     
     });
-    
+
     $("#btn-flush").click(function() {
         $("#form-flush").submit();
+        updatecartview();     
     });
-    
+
     $('#addtocart').on('submit', function() {
         var $this = $(this);
         $.ajax({
@@ -163,6 +165,7 @@ $(document).ready(function() {
                 $('body,html').animate({scrollTop: 0}, 500);
             }
         });
+        updatecartview();     
         return false; // j'empêche le navigateur de soumettre lui-même le formulaire
     });
 
@@ -173,9 +176,12 @@ $(document).ready(function() {
 
 function updateCart(parentform) {
     $("#" + parentform).submit();
+    updatecartview();     
 }
 
 function deleteCart(parentform) {
     $("#" + parentform).find('input[class*="quantity"]').first().val(0);
     $("#" + parentform).submit();
+    updatecartview();     
 }
+

@@ -17,22 +17,34 @@ class User extends CI_Controller {
 
     //account
     public function index() {
-        //if(!$userislogged){redirect('/user/login', 'refresh');}
-        
+        if (!isset($this->session)) {
+            redirect('/user/login', 'refresh');
+        }
+
         $this->load->view('layouts/auth/account');
     }
 
     public function login() {
+        $mail = "";
         if ($this->input->post()) {
-            
-        
+            $mail = $_POST['email'];
+            $return = $this->auth_model->connect_user($_POST['email'], $_POST['password']);
+
+            if ($return == 1) {
+                $user = $this->auth_model->get_user($mail);
+                $this->session->set_userdata($user[1]);
+                redirect("home/index");
+            } else {
+                $this->session->set_flashdata('message', 'mauvais mot de passe ou mail');
+                redirect("home/index");
+            }
         }
         $this->load->view('layouts/auth/login');
     }
 
     public function logout() {
-
-        $this->load->view('layouts/auth/login');
+        $this->session->sess_destroy();
+        redirect("home/index");
     }
 
     public function register() {
@@ -46,7 +58,7 @@ class User extends CI_Controller {
                 array_push($inordervalues, $_POST[$field]);
             }
             $user = array_combine($inorderfields, $inordervalues);
-            
+
             if ($bool < 1) {
                 $statut = $this->auth_model->create_user($user);
                 if ($statut == 1) {
@@ -74,6 +86,8 @@ class User extends CI_Controller {
 
     public function edit() {
 
+
+        var_dump($return);
         $this->load->view('layouts/auth/edit');
     }
 

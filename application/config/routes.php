@@ -42,6 +42,7 @@ if (!defined('BASEPATH'))
  */
 
 $route['default_controller'] = "home";
+$route['debug'] = "home/debug";
 
 $route['upload'] = "upload/index";
 $route['upload/file'] = "upload/file";
@@ -56,6 +57,11 @@ $route['categories'] = "home/notfound";
 $route['categories_json'] = "categories/index";
 
 $route['cart'] = "cart/index";
+$route['cart/add'] = "cart/add";
+$route['cart/update'] = "cart/update";
+$route['cart/destroy'] = "cart/destroy";
+$route['cart/getcart'] = "cart/getcart";
+$route['cart/gettotal'] = "cart/gettotal";
 
 $route['user'] = "user/index";
 $route['user/login'] = "user/login";

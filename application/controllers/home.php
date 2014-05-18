@@ -17,12 +17,13 @@ class Home extends CI_Controller {
 
     public function index() {
         $this->load->view('layouts/index');
-        $this->output->cache(60);
     }
     
     public function notfound(){
         $this->load->view('statics/404');
-        $this->output->cache(60);
+    }
+    public function debug(){
+        var_dump($this->session->all_userdata());
     }
 
 }

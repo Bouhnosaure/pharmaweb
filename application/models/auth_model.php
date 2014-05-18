@@ -19,11 +19,39 @@ class Auth_model extends CI_Model {
     }
 
     public function get_user($mail) {
+        $stmt = OCIParse($this->db->conn_id, "SELECT PHARMAWEB.USERS_PACK.GET_ONE_USER(:MAIL) AS mfrc FROM dual");
+        oci_bind_by_name($stmt, ':MAIL', $mail, 200);
         
+        OCIExecute($stmt);
+        
+        $array = array();
+        while (($row = oci_fetch_array($stmt, OCI_ASSOC))) {
+            $rc = $row['MFRC'];
+            $i = 1;
+            OCIExecute($rc);
+            while (($rc_row = oci_fetch_array($rc, OCI_ASSOC))) {
+                $array[$i] = $rc_row;
+                $i++;
+            }
+        }
+        return $array;
+        oci_close($this->db->conn_id);
     }
 
     public function connect_user($mail, $password) {
+        $role_id = 1;
+
+        $stmt = OCIParse($this->db->conn_id, "begin :ret  :=  PHARMAWEB.USERS_PACK.CONNEXION (:MAIL, :PASSWD, :ROLE); END; ");
+        oci_bind_by_name($stmt, ':MAIL', $mail, 200);
+        oci_bind_by_name($stmt, ':PASSWD', $password, 200);
+        oci_bind_by_name($stmt, ':ROLE', $role_id, 200);
+        oci_bind_by_name($stmt, ':ret', $r, 200);
+
+        $result = OCIExecute($stmt);
         
+        return $r;
+
+        oci_close($this->db->conn_id);
     }
 
     public function create_user($user) {

@@ -48,8 +48,6 @@ class Cart extends CI_Controller {
         } else {
             $this->load->view('statics/404');
         }
-        
-        
     }
 
     public function destroy() {
@@ -65,6 +63,15 @@ class Cart extends CI_Controller {
         $str = preg_replace('#&[^;]+;#', '', $str); // supprime les autres caractères
 
         return $str;
+    }
+
+    public function getcart() {
+        $cart = $this->cart->contents();
+        echo json_encode($cart);
+    }
+
+    public function gettotal() {
+        echo json_encode($this->cart->total());
     }
 
 }
