@@ -27,11 +27,31 @@ class Upload extends CI_Controller {
 
         if (!empty($_FILES)) {
             $tempFile = $_FILES['file']['tmp_name'];
-            $targetPath = $_SERVER['DOCUMENT_ROOT'].'/pharmaweb/'.'application/uploads/';
+            $targetPath = $_SERVER['DOCUMENT_ROOT'] . '/pharmaweb/' . 'application/uploads/';
             $targetFile = $targetPath . $_FILES['file']['name'];
             move_uploaded_file($tempFile, $targetFile);
-
         }
+    }
+
+    public function image($name) {
+        $targetPath = $_SERVER['DOCUMENT_ROOT'] . '/pharmaweb/' . 'application/uploads/';
+        $contents =null;
+        
+        // to blob => $content
+        if ($fp = @fopen($targetPath . $name, "r")) {
+            // Read until the end-of-file marker.
+            while (!feof($fp))
+                $contents .= fgetc($fp);
+            // Close an open file handle.
+            fclose($fp);
+        }
+        
+        
+        
+        //to image
+        
+        echo $contents;
+        header("Content-type: image/jpg");
     }
 
 }

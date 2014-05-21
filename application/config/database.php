@@ -45,12 +45,13 @@
 | the active record class
  * cesi : 10.33.127.132
  * hamachi:25.124.117.35;
+ * joh:192.168.0.22;
 */
 
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.0.22)(PORT=1521)) (CONNECT_DATA=(SID = orclpharma)))';
+$db['default']['hostname'] = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.33.127.132)(PORT=1521)) (CONNECT_DATA=(SID = orclpharma)))';
 $db['default']['username'] = 'pharmaweb';
 $db['default']['password'] = 'root';
 $db['default']['database'] = '';

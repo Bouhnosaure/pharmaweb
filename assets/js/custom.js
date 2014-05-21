@@ -145,13 +145,12 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
     $("#buttonsubmit").click(function() {
-        $("#addtocart").submit();
-        updatecartview();     
+        updatecartview();
     });
 
     $("#btn-flush").click(function() {
         $("#form-flush").submit();
-        updatecartview();     
+        updatecartview();
     });
 
     $('#addtocart').on('submit', function() {
@@ -164,8 +163,11 @@ $(document).ready(function() {
                 $("#alert-container").html('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>' + html + '</strong></div>');
                 $('body,html').animate({scrollTop: 0}, 500);
             }
+        }).done(function(data) {
+            updatecartview();
         });
-        updatecartview();     
+        
+        //updatecartview();
         return false; // j'empêche le navigateur de soumettre lui-même le formulaire
     });
 
@@ -176,12 +178,12 @@ $(document).ready(function() {
 
 function updateCart(parentform) {
     $("#" + parentform).submit();
-    updatecartview();     
+    updatecartview();
 }
 
 function deleteCart(parentform) {
     $("#" + parentform).find('input[class*="quantity"]').first().val(0);
     $("#" + parentform).submit();
-    updatecartview();     
+    updatecartview();
 }
 

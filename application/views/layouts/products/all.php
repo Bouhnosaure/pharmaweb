@@ -55,7 +55,7 @@
                                                     <input type="hidden" name="price" value="<?= $product['PRODUCTS_TAXES_FREE_PRICE'] ?>">
                                                     <input type="hidden" name="name" value="<?= $product['PRODUCTS_LABEL'] ?>">
                                                     <input type="hidden" name="qty" value="1">
-                                                    <button href="#" id="buttonsubmit" class="btn btn-danger btn-sm">Ajouter au panier</button>
+                                                    <button href="#" id="buttonsubmit" type="submit" class="btn btn-danger btn-sm">Ajouter au panier</button>
                                                 </form>
                                             </div>
                                             <div class="clearfix"></div>

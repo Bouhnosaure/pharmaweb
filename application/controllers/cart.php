@@ -74,4 +74,42 @@ class Cart extends CI_Controller {
         echo json_encode($this->cart->total());
     }
 
+    public function checkout() {
+        if ($this->session->userdata('USERS_ID') == FALSE) {
+            redirect('/user/login', 'refresh');
+        }
+
+        $this->load->view('layouts/order/checkout');
+    }
+
+    public function process() {
+        if ($this->session->userdata('USERS_ID') == FALSE) {
+            redirect('/user/login', 'refresh');
+        } else {
+            if ($this->input->post()) {
+                $this->load->model('order_model');
+                $bool = NULL;
+                $order = array();
+                
+                $inorderfields = array('name', 'surname', 'adress', 'adresscomp', 'villeid', 'ville', 'cardowner', 'cardnumber', 'cardcvc', 'cardexpiration');
+                $inordervalues = array();
+
+                foreach ($inorderfields as $field) {
+                    $bool = $bool + empty($_POST[$field]);
+                    array_push($inordervalues, $_POST[$field]);
+                }
+                $customer = array_combine($inorderfields, $inordervalues);
+                
+                $order["user"] = $this->session->all_userdata();
+                $order["customer"] = $customer;
+                $order["cart"] = $this->cart->contents();
+                $order["total"] = $this->cart->total();
+                
+                $this->order_model->create_order($order);
+                
+                $this->load->view('layouts/order/success');
+            }
+        }
+    }
+
 }

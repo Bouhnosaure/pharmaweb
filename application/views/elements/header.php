@@ -39,7 +39,7 @@
                     <h1><a href="<?= base_url() ?>">PharmaWeb</a></h1>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-5">
+            <div class="col-md-4 col-sm-4">
                 <!-- Navigation menu -->
                 <div class="navi">
                     <div id="ddtopmenubar" class="mattblackmenu">
@@ -55,8 +55,7 @@
                                     </ul>
                                 </li>
                             <?php endif; ?>
-                            <li><a href="contactus.html">Contact</a></li>
-                            <li><a href="aboutus.html">A Propos</a></li>
+                            <li><a href="<?= site_url("contact") ?>">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -65,7 +64,7 @@
                 <div class="navis"></div>                  
             </div>
 
-            <div class="col-md-4 col-sm-5">
+            <div class="col-md-6 col-sm-6">
                 <div class="kart-links">
                     <?php if ($this->session->userdata('USERS_ID') != FALSE): ?>
                         <a href="<?= site_url("user") ?>"><?= $this->session->userdata('USERS_LASTNAME'); ?></a>
@@ -89,6 +88,7 @@
         $("#cartable").empty();
 
         $.getJSON("<?= base_url() ?>cart/getcart", function(data) {
+            $("#cartable").empty();
             $.each(data, function() {
                 console.log(this);
                 var row = $('<tr><td><a href="<?= base_url() ?>products/detail/' + this.id + '">' + this.name + '</a></td><td>' + this.qty + '</td><td>' + this.price + '€</td></tr>');

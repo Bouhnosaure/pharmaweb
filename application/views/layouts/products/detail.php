@@ -23,8 +23,8 @@
                             echo set_breadcrumb();
                             ?>
                             <div id="alert-container"></div>
-                                
-                            
+
+
                             <div class="single-item">
                                 <div class="row">
                                     <div class="col-md-4 col-xs-5">
@@ -63,7 +63,7 @@
                                             <br>
                                             <div class="input-group">
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-info" id="buttonsubmit" type="button">Ajouter au panier!</button>
+                                                    <button class="btn btn-info" id="buttonsubmit" type="submit">Ajouter au panier!</button>
                                                 </span>
                                             </div><!-- /input-group -->
                                         </form>
@@ -82,9 +82,8 @@
                                 <li><a href="#tab2" data-toggle="tab">Informations</a></li>
                             </ul>
                             <?php
-                            $description = explode("|", $product['PRODUCTS_DESCRIPTION']);
-                            $description = $description[0];
-                            $lien = $description[1];
+                            $descriptions = explode("|", $product['PRODUCTS_DESCRIPTION']);
+                            $description = $descriptions[0];
                             ?>
                             <!-- Tab Content -->
                             <div id="myTabContent" class="tab-content">
@@ -94,7 +93,16 @@
                                 </div>
                                 <!-- Sepcs -->
                                 <div class="tab-pane fade" id="tab2">
-                                    <a href="<?= $lien ?>" data-toggle="tab">Informations complémentaires officielles</a>     
+                                    <ul>
+                                        <?php foreach ($descriptions as $key => $lien): ?>
+                                            <?php if ($key == 0): ?>
+                                            <?php else: ?>
+                                                <li>
+                                                    <a href="<?= $lien ?>" data-toggle="tab">Informations complémentaires officielles</a>
+                                                </li>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </ul>
                                 </div>
                             </div>
 

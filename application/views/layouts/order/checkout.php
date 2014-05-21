@@ -30,6 +30,10 @@
             * html .ui-autocomplete {
                 height: 250px;
             }
+
+            .submit-button {
+                margin-top: 10px;
+            }
         </style>
     </head>
     <body>
@@ -48,9 +52,9 @@
                     <div class="block-wizard">
                         <div id="wizard1" class="wizard wizard-ux">
                             <ul class="steps">
-                                <li data-target="#step1" class="active">Etape 1<span class="chevron"></span></li>
-                                <li data-target="#step2">Etape 2<span class="chevron"></span></li>
-                                <li data-target="#step3">Etape 3<span class="chevron"></span></li>
+                                <li data-target="#step1" class="active">Adresse<span class="chevron"></span></li>
+                                <li data-target="#step2">Paiement<span class="chevron"></span></li>
+                                <li data-target="#step3">Confirmation<span class="chevron"></span></li>
                             </ul>
                             <div class="actions">
                                 <button type="button" class="btn btn-xs btn-prev btn-primary"> <i class="icon-arrow-left"></i>Precedent</button>
@@ -58,12 +62,12 @@
                             </div>
                         </div>
                         <div class="step-content">
-                            <form class="form-horizontal group-border-dashed" id="wizardform" method="post" action="<?= site_url("user/register") ?>" data-parsley-namespace="data-parsley-" data-parsley-validate novalidate> 
+                            <form class="form-horizontal group-border-dashed" id="wizardform" method="post" action="<?= site_url("cart/process") ?>" data-parsley-namespace="data-parsley-" data-parsley-validate novalidate> 
                                 <div class="step-pane active" id="step1">
 
                                     <div class="form-group no-padding">
                                         <div class="col-sm-12">
-                                            <h3>Création d'un compte utilisateur <small>informations de base</small></h3>
+                                            <h3>Adresse de paiement</h3>
                                         </div>
                                     </div>
                                     <hr class="colorgraph">
@@ -81,57 +85,17 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">E-Mail</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" name="mail" class="form-control" placeholder="E-Mail" required>
-                                        </div>
-                                    </div>	
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Mot de passe</label>
-                                        <div class="col-sm-9">
-                                            <input type="password" name="password" class="form-control" placeholder="Entrez votre mot de passe" required>
-                                        </div>
-                                    </div>		
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Verification du mot de passe</label>
-                                        <div class="col-sm-9">
-                                            <input type="password" type="password-confirm" class="form-control" placeholder="Entrez votre mot de passe encore" required>
-                                        </div>
-                                    </div>
-                                    <hr class="colorgraph">									
-                                </div>
-                                <div class="step-pane" id="step2">
-                                    <div class="form-group no-padding">
-                                        <div class="col-sm-12">
-                                            <h3>Création d'un compte utilisateur <small>informations complémentaires (1/2)</small></h3>
-                                        </div>
-                                    </div>
-                                    <hr class="colorgraph">
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Téléphone Fixe</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" name="fixnumber" data-mask="phone" class="form-control" placeholder="Téléphone Fixe" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Téléphone Mobile</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" name="mobilenumber" data-mask="phone" class="form-control" placeholder="Téléphone Mobile" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="col-sm-3 control-label">Adresse</label>
                                         <div class="col-sm-9">
                                             <input type="text" name="adress" class="form-control" placeholder="Adresse" required>
                                         </div>
-                                    </div>	
+                                    </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Adresse Complementaire</label>
+                                        <label class="col-sm-3 control-label">Adresse complementaire</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="adresscomp" class="form-control" placeholder="Adresse Complementaire">
+                                            <input type="text" name="adresscomp" class="form-control" placeholder="Adresse complementaire" required>
                                         </div>
-                                    </div>		
+                                    </div>
                                     <div class="form-group">
                                         <div class="ui-widget">
                                             <label class="col-sm-3 control-label">Ville</label>
@@ -141,65 +105,84 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <hr class="colorgraph">		
+
+                                    <hr class="colorgraph">									
                                 </div>
-                                <div class="step-pane" id="step3">
+
+                                <div class="step-pane" id="step2">
                                     <div class="form-group no-padding">
                                         <div class="col-sm-12">
-                                            <h3>Création d'un compte utilisateur <small>informations complémentaires (2/2)</small></h3>
+                                            <h3>Paiement</h3>
                                         </div>
                                     </div>
                                     <hr class="colorgraph">
 
                                     <div class="form-group">
-                                        <div class="ui-widget">
-                                            <label class="col-sm-3 control-label">Mutuelle</label>
-                                            <div class="col-sm-9">
-                                                <input id="mutualid" type="hidden" name="mutualid">
-                                                <input type="text" id="mutual" name="mutual" class="form-control" placeholder="Mutuelle" required >
-                                            </div>
+                                        <label class="col-sm-3 control-label">Nom du titulaire de la carte</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="cardowner" class="form-control" placeholder="Nom" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Numéro de carte</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="cardnumber" class="form-control" placeholder="Numéro de carte" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Centres de mutuelle</label>
-                                        <div class="col-sm-9">
-                                            <input id="mutualcenterid" type="hidden" name="mutualcenterid">
-                                            <select id="mutualcenter" name="mutualcenter" class="form-control"></select>
+                                        <label class="col-sm-3 control-label">CVC</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" name="cardcvc" class="form-control" placeholder="CVC" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Numéro de sécurité sociale</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" name="secu" data-mask="secu" class="form-control" placeholder="Numero de securité sociale" required>
+                                        <label class="col-sm-3 control-label">Date d'expiration</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" name="cardexpiration" class="form-control" placeholder="Date d'expiration (MM/AA)" required>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Genre</label>
-                                        <div class="col-sm-9">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="gender" id="optionsRadios1" value="Mr." checked>
-                                                    Homme
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="gender" id="optionsRadios2" value="Mme.">
-                                                    Femme
-                                                </label>
-                                            </div>
+
+                                    <hr class="colorgraph">		
+                                </div>
+                                <div class="step-pane" id="step3">
+                                    <div class="form-group no-padding">
+                                        <div class="col-sm-12">
+                                            <h3>Confirmation</h3>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Date de naissance (au format jour/mois/année)</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" data-mask="date" name="birth" class="form-control" placeholder="JJ/MM/AAAA" required/>
-                                        </div>
-                                    </div>
+                                    <hr class="colorgraph">
+
+
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Quantité</th>
+                                                <th>Prix</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="confirmtable">
+
+                                        </tbody>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td><h3>Total</h3></td>
+                                                <td class="text-right"><h3><strong><?= $this->cart->total() ?>€</strong></h3></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    <p>
+                                        Vous êtes sur le point d'envoyer votre commande, vous receverez un email pour confirmer la prise en charge de votre commande.
+                                    </p>
+
                                     <hr class="colorgraph">	
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button id="buttonsubmitwizard" data-wizard="#wizard1" class="btn btn-success wizard-next"><i class="fa fa-check"></i>Envoyer</button>
+                                            <button id="buttonsubmitwizard" data-wizard="#wizard1" class="btn btn-success wizard-next"><i class="fa fa-check"></i>Commander</button>
                                         </div>
                                     </div>	
                                 </div>
@@ -232,43 +215,7 @@
                         }
                     });
                 });
-
                 $(document).ready(function() {
-                    $("#mutual").autocomplete({
-                        source: "<?= base_url() ?>autocomplete/mutuals",
-                        minLength: 2,
-                        select: function(event, ui) {
-                            event.preventDefault();
-                            $('#mutual').val(ui.item.label);
-                            $('#mutualid').val(ui.item.id);
-
-                            $('#mutualcenter').empty();
-                            $.getJSON('<?= base_url() ?>autocomplete/mutualscenters?term=' + ui.item.id, function(mutualscentersdata) {
-                                var html = '';
-                                var len = mutualscentersdata.length;
-                                for (var i = 0; i < len; i++) {
-                                    html += '<option value="' + mutualscentersdata[i].id + '">' + mutualscentersdata[i].value + '</option>';
-                                }
-                                $('#mutualcenter').append(html);
-                                $('#mutualcenterid').val($("#mutualcenter").val());
-                            })
-                        },
-                        html: true, // optional (jquery.ui.autocomplete.html.js required)
-
-                        // optional (if other layers overlap autocomplete list)
-                        open: function(event, ui) {
-                            $(".ui-autocomplete").css("z-index", 1000);
-                        }
-                    });
-
-
-                });
-
-
-
-
-                $(document).ready(function() {
-
                     //datamask
                     $("[data-mask='date']").mask("99/99/9999");
                     $("[data-mask='phone']").mask("9999999999");
@@ -276,7 +223,6 @@
                 });
 
                 $(document).ready(function() {
-
                     //Fuel UX
                     $('.wizard-ux').wizard();
                     $('.wizard-ux').on('changed', function() {
@@ -317,6 +263,16 @@
                 $(document).ready(function() {
                     $('#mutualcenter').on('change', function() {
                         $('#mutualcenterid').val(this.value);
+                    });
+                });
+                $(document).ready(function() {
+                    $.getJSON("<?= base_url() ?>cart/getcart", function(data) {
+                        $.each(data, function() {
+                            console.log(this);
+                            var row = $('<tr><td><a href="<?= base_url() ?>products/detail/' + this.id + '">' + this.name + '</a></td><td>' + this.qty + '</td><td>' + this.price + '€</td></tr>');
+                            $("#confirmtable").append(row);
+
+                        });
                     });
                 });
             </script> 

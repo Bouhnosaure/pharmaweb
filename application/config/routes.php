@@ -43,6 +43,7 @@ if (!defined('BASEPATH'))
 
 $route['default_controller'] = "home";
 $route['debug'] = "home/debug";
+$route['contact'] = "home/contact";
 
 $route['upload'] = "upload/index";
 $route['upload/file'] = "upload/file";

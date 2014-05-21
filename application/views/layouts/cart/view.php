@@ -70,8 +70,8 @@
                                         </form>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="index.html" class="btn btn-info">Continuer mes achats</a>
-                                        <a href="checkout.html" class="btn btn-danger">Commander</a>
+                                        <a href="<?= base_url() ?>products" class="btn btn-info">Continuer mes achats</a>
+                                        <a href="<?= base_url() ?>cart/checkout" class="btn btn-danger">Commander</a>
                                     </div>
                                 </div>
                             </div>

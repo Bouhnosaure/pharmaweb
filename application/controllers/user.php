@@ -17,11 +17,13 @@ class User extends CI_Controller {
 
     //account
     public function index() {
-        if (!isset($this->session)) {
+        if ($this->session->userdata('USERS_ID') == FALSE) {
             redirect('/user/login', 'refresh');
         }
+        $this->load->model('order_model');
+        $data['commands'] = $this->order_model->get_orders_by_user($this->session->userdata('USERS_ID'));
 
-        $this->load->view('layouts/auth/account');
+        $this->load->view('layouts/auth/account', $data);
     }
 
     public function login() {
@@ -99,6 +101,16 @@ class User extends CI_Controller {
     public function success() {
 
         $this->load->view('statics/success');
+    }
+
+    public function orderdetail($id) {
+        if ($this->session->userdata('USERS_ID') == FALSE) {
+            redirect('/user/login', 'refresh');
+        }
+        $this->load->model('order_model');
+        $data['commands'] = $this->order_model->get_order_by_user($id);
+        //var_dump($data);
+        $this->load->view('layouts/cart/order', $data);
     }
 
 }

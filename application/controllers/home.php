@@ -12,17 +12,25 @@ class Home extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        
     }
 
     public function index() {
         $this->load->view('layouts/index');
     }
-    
-    public function notfound(){
+
+    public function notfound() {
         $this->load->view('statics/404');
     }
-    public function debug(){
+
+    public function contact() {
+        $this->load->view('statics/contact');
+    }
+
+    public function debug() {
+        $datestring = "%d/%m/%Y";
+        $time = time();
+
+        echo mdate($datestring, $time);
         var_dump($this->session->all_userdata());
     }
 

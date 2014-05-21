@@ -25,4 +25,5 @@
 <script src="<?= asset_url() ?>js/bootstrap.switch/bootstrap-switch.min.js" type="text/javascript" ></script>
 <script src="<?= asset_url() ?>js/jquery.select2/select2.min.js" type="text/javascript" ></script>
 <script src="<?= asset_url() ?>js/bootstrap.slider/js/bootstrap-slider.js" type="text/javascript" ></script>
+<script src="<?= asset_url() ?>js/jquery.validate/jquery.validate.min.js" type="text/javascript" ></script>
  
