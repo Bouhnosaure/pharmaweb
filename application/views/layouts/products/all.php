@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-
+        <?php $this->load->view('elements/suggests'); ?>
 
 
         <?php $this->load->view('elements/footer'); ?>

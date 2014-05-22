@@ -21,9 +21,9 @@ class Auth_model extends CI_Model {
     public function get_user($mail) {
         $stmt = OCIParse($this->db->conn_id, "SELECT PHARMAWEB.USERS_PACK.GET_ONE_USER(:MAIL) AS mfrc FROM dual");
         oci_bind_by_name($stmt, ':MAIL', $mail, 200);
-        
+
         OCIExecute($stmt);
-        
+
         $array = array();
         while (($row = oci_fetch_array($stmt, OCI_ASSOC))) {
             $rc = $row['MFRC'];
@@ -48,7 +48,7 @@ class Auth_model extends CI_Model {
         oci_bind_by_name($stmt, ':ret', $r, 200);
 
         $result = OCIExecute($stmt);
-        
+
         return $r;
 
         oci_close($this->db->conn_id);
@@ -85,7 +85,17 @@ class Auth_model extends CI_Model {
     }
 
     public function edit_user($array) {
-        
+        if ($this->session->userdata('USERS_ID') == FALSE) {
+            
+        } else {
+            $this->db->trans_begin();
+            $this->db->query("UPDATE USERS SET USERS_NAME = '" . $array['USERS_NAME'] . "', USERS_LASTNAME = '" . $array['USERS_LASTNAME'] . "',"
+                    . " USERS_MAIL = '" . $array['USERS_MAIL'] . "', USERS_PHONE = '" . $array['USERS_PHONE'] . "', USERS_MOBILE = '" . $array['USERS_MOBILE'] . "', "
+                    . " USERS_SOCIAL_NUMBER = '" . $array['USERS_SOCIAL_NUMBER'] . "', USERS_BIRTH_DATE = TO_DATE('" . $array['USERS_BIRTH_DATE'] . "','DD/MM/YYYY') "
+                    . "WHERE USERS_ID = '" . $this->session->userdata('USERS_ID') . "'");
+            $this->db->trans_commit();
+            oci_close($this->db->conn_id);
+        }
     }
 
 }

@@ -87,10 +87,22 @@ class User extends CI_Controller {
     }
 
     public function edit() {
+        if ($this->input->post()) {
+            $this->auth_model->edit_user($this->input->post());
 
 
-        var_dump($return);
-        $this->load->view('layouts/auth/edit');
+            $user = $this->auth_model->get_user($this->session->userdata('USERS_MAIL'));
+
+            foreach ($user as $key => $value) {
+                $this->session->unset_userdata($key);
+            }
+            $this->session->set_userdata($user);
+
+            redirect("user/edit");
+        } else {
+            $data['user'] = $this->auth_model->get_user($this->session->userdata('USERS_MAIL'));
+            $this->load->view('layouts/auth/edit', $data);
+        }
     }
 
     public function exist() {
