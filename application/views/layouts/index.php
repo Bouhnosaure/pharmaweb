@@ -63,7 +63,7 @@
                 <span class="icon-next"></span>
             </a>
         </div>
-
+        
         <div class="hero">
             <div class="container">
                 <div class="row">
@@ -79,6 +79,8 @@
                 <div class="sep-bor"></div>
             </div>
         </div>
+        
+        <?php $this->load->view('elements/suggests'); ?>
 
         <?php $this->load->view('elements/footer'); ?>
         <?php $this->load->view('elements/scripts'); ?>

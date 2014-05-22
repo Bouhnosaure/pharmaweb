@@ -9,7 +9,7 @@
         <div class="clearfix"></div>
         <div class="container">
             <div class="row">
-                <?php $this->load->view('elements/accountsidebar'); ?>
+                <?php //$this->load->view('elements/accountsidebar'); ?>
                 <?php if (!empty($commands)): ?>
                     <div class="col-md-9">
                         <h3><i class="icon-user color"></i>Détail Commande</h3>

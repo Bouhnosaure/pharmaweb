@@ -51,31 +51,7 @@ $(".navis select").change(function() {
 
 /* Carousel */
 
-$('#carousel_container').carouFredSel({
-    responsive: true,
-    width: '100%',
-    direction: 'right',
-    scroll: {
-        items: 4,
-        delay: 2000,
-        duration: 500,
-        pauseOnHover: "true"
-    },
-    prev: {
-        button: "#car_prev",
-        key: "left"
-    },
-    next: {
-        button: "#car_next",
-        key: "right"
-    },
-    items: {
-        visible: {
-            min: 1,
-            max: 4
-        }
-    }
-});
+
 
 /* Scroll to Top */
 

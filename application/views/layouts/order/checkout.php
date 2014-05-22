@@ -54,7 +54,8 @@
                             <ul class="steps">
                                 <li data-target="#step1" class="active">Adresse<span class="chevron"></span></li>
                                 <li data-target="#step2">Paiement<span class="chevron"></span></li>
-                                <li data-target="#step3">Confirmation<span class="chevron"></span></li>
+                                <li data-target="#step3">Pharmacie<span class="chevron"></span></li>
+                                <li data-target="#step4">Confirmation<span class="chevron"></span></li>
                             </ul>
                             <div class="actions">
                                 <button type="button" class="btn btn-xs btn-prev btn-primary"> <i class="icon-arrow-left"></i>Precedent</button>
@@ -148,6 +149,26 @@
                                 <div class="step-pane" id="step3">
                                     <div class="form-group no-padding">
                                         <div class="col-sm-12">
+                                            <h3>Pharmacie</h3>
+                                        </div>
+                                    </div>
+                                    <hr class="colorgraph">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Selectionnez la pharmacie</label>
+                                        <div class="col-sm-3">
+                                            <select id="ListeElement"> 
+                                                <option value="valeur1">Pharmacie 1</option> 
+                                                <option value="valeur2">Pharmacie 2</option> 
+                                                <option value="valeur3">Pharmacie 3</option> 
+                                            </select> 
+                                        </div>
+                                    </div>
+
+                                    <hr class="colorgraph">		
+                                </div>
+                                <div class="step-pane" id="step4">
+                                    <div class="form-group no-padding">
+                                        <div class="col-sm-12">
                                             <h3>Confirmation</h3>
                                         </div>
                                     </div>
@@ -174,7 +195,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    
+
                                     <p>
                                         Vous êtes sur le point d'envoyer votre commande, vous receverez un email pour confirmer la prise en charge de votre commande.
                                     </p>
@@ -197,84 +218,84 @@
             <script src="<?= asset_url() ?>js/jquery.ui/js/jquery-ui-1.10.4.custom.js" type="text/javascript" ></script>
             <script src="<?= asset_url() ?>js/jquery.maskedinput/jquery.maskedinput.js" type="text/javascript"></script>
             <script type="text/javascript">
-                $(document).ready(function() {
+                                                $(document).ready(function() {
 
-                    $("#ville").autocomplete({
-                        source: "<?= base_url() ?>autocomplete/cities",
-                        minLength: 2,
-                        select: function(event, ui) {
-                            event.preventDefault();
-                            $('#ville').val(ui.item.label);
-                            $('#villeid').val(ui.item.id);
-                        },
-                        html: true, // optional (jquery.ui.autocomplete.html.js required)
+                                                    $("#ville").autocomplete({
+                                                        source: "<?= base_url() ?>autocomplete/cities",
+                                                        minLength: 2,
+                                                        select: function(event, ui) {
+                                                            event.preventDefault();
+                                                            $('#ville').val(ui.item.label);
+                                                            $('#villeid').val(ui.item.id);
+                                                        },
+                                                        html: true, // optional (jquery.ui.autocomplete.html.js required)
 
-                        // optional (if other layers overlap autocomplete list)
-                        open: function(event, ui) {
-                            $(".ui-autocomplete").css("z-index", 1000);
-                        }
-                    });
-                });
-                $(document).ready(function() {
-                    //datamask
-                    $("[data-mask='date']").mask("99/99/9999");
-                    $("[data-mask='phone']").mask("9999999999");
-                    $("[data-mask='secu']").mask("999999999999999");
-                });
+                                                        // optional (if other layers overlap autocomplete list)
+                                                        open: function(event, ui) {
+                                                            $(".ui-autocomplete").css("z-index", 1000);
+                                                        }
+                                                    });
+                                                });
+                                                $(document).ready(function() {
+                                                    //datamask
+                                                    $("[data-mask='date']").mask("99/99/9999");
+                                                    $("[data-mask='phone']").mask("9999999999");
+                                                    $("[data-mask='secu']").mask("999999999999999");
+                                                });
 
-                $(document).ready(function() {
-                    //Fuel UX
-                    $('.wizard-ux').wizard();
-                    $('.wizard-ux').on('changed', function() {
-                        //delete $.fn.slider;
-                        $('.bslider').slider();
-                    });
-                    $(".wizard-next").click(function(e) {
-                        $("#wizardform").validate();
-                        var id = $(this).data("wizard");
-                        $(id).wizard('next');
-                        e.preventDefault();
-                    });
-                    $(".wizard-previous").click(function(e) {
-                        var id = $(this).data("wizard");
-                        $(id).wizard('previous');
-                        e.preventDefault();
-                    });
-                    /*Switch*/
-                    $('.switch').bootstrapSwitch();
-                    /*Slider*/
-                    $('.bslider').slider();
-                    /*Select2*/
-                    $(".select2").select2({
-                        width: '100%'
-                    });
-                    /*Tags*/
-                    $(".tags").select2({tags: 0, width: '100%'});
-                });
+                                                $(document).ready(function() {
+                                                    //Fuel UX
+                                                    $('.wizard-ux').wizard();
+                                                    $('.wizard-ux').on('changed', function() {
+                                                        //delete $.fn.slider;
+                                                        $('.bslider').slider();
+                                                    });
+                                                    $(".wizard-next").click(function(e) {
+                                                        $("#wizardform").validate();
+                                                        var id = $(this).data("wizard");
+                                                        $(id).wizard('next');
+                                                        e.preventDefault();
+                                                    });
+                                                    $(".wizard-previous").click(function(e) {
+                                                        var id = $(this).data("wizard");
+                                                        $(id).wizard('previous');
+                                                        e.preventDefault();
+                                                    });
+                                                    /*Switch*/
+                                                    $('.switch').bootstrapSwitch();
+                                                    /*Slider*/
+                                                    $('.bslider').slider();
+                                                    /*Select2*/
+                                                    $(".select2").select2({
+                                                        width: '100%'
+                                                    });
+                                                    /*Tags*/
+                                                    $(".tags").select2({tags: 0, width: '100%'});
+                                                });
 
-                $(document).ready(function() {
-                    $(function() {
-                        $("#buttonsubmitwizard").click(function() {
-                            $("#wizardform").submit();
-                        });
-                    });
-                });
+                                                $(document).ready(function() {
+                                                    $(function() {
+                                                        $("#buttonsubmitwizard").click(function() {
+                                                            $("#wizardform").submit();
+                                                        });
+                                                    });
+                                                });
 
-                $(document).ready(function() {
-                    $('#mutualcenter').on('change', function() {
-                        $('#mutualcenterid').val(this.value);
-                    });
-                });
-                $(document).ready(function() {
-                    $.getJSON("<?= base_url() ?>cart/getcart", function(data) {
-                        $.each(data, function() {
-                            console.log(this);
-                            var row = $('<tr><td><a href="<?= base_url() ?>products/detail/' + this.id + '">' + this.name + '</a></td><td>' + this.qty + '</td><td>' + this.price + '€</td></tr>');
-                            $("#confirmtable").append(row);
+                                                $(document).ready(function() {
+                                                    $('#mutualcenter').on('change', function() {
+                                                        $('#mutualcenterid').val(this.value);
+                                                    });
+                                                });
+                                                $(document).ready(function() {
+                                                    $.getJSON("<?= base_url() ?>cart/getcart", function(data) {
+                                                        $.each(data, function() {
+                                                            console.log(this);
+                                                            var row = $('<tr><td><a href="<?= base_url() ?>products/detail/' + this.id + '">' + this.name + '</a></td><td>' + this.qty + '</td><td>' + this.price + '€</td></tr>');
+                                                            $("#confirmtable").append(row);
 
-                        });
-                    });
-                });
+                                                        });
+                                                    });
+                                                });
             </script> 
     </body>
 
