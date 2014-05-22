@@ -9,9 +9,9 @@
         <div class="clearfix"></div>
         <div class="container">
             <div class="row">
-                <?php $this->load->view('elements/accountsidebar'); ?>
+                <?php //$this->load->view('elements/accountsidebar'); ?>
                 <div class="col-md-9">
-                    <h3><i class="icon-user color"></i> &nbsp;My Account</h3>
+                    <h3><i class="icon-user color"></i> &nbsp;Mon compte</h3>
                     <!-- Your details -->
                     <div class="address">
                         <address>
@@ -35,7 +35,7 @@
 
                     <hr />
 
-                    <h4>My Recent Purchases</h4>
+                    <h4>Historique des commandes</h4>
 
                     <table class="table table-striped tcart">
                         <thead>

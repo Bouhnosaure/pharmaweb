@@ -33,7 +33,7 @@
                     <div class="carousel-caption">
                         <h2 class="animated fadeInLeftBig">Stressé ? Anxieux ?</h2>
                         <p class="animated fadeInRightBig">Retrouvez tout nos produits contre le stress et l'anxiété</p>
-                        <a href="<?= base_url() ?>products/cat/15" class="animated fadeInLeftBig btn btn-info btn-lg">J'y vais</a>
+                        <a href="<?= base_url() ?>products" class="animated fadeInLeftBig btn btn-info btn-lg">J'y vais</a>
                     </div>
                 </div>
 
@@ -42,7 +42,7 @@
                     <div class="carousel-caption">
                         <h2 class="animated fadeInLeftBig">Vous ronflez ?</h2>
                         <p class="animated fadeInRightBig">Retrouvez tout nos produits contre le ronflement</p>
-                        <a href="<?= base_url() ?>products/cat/10" class="animated fadeInLeftBig btn btn-info btn-lg">J'y vais</a>
+                        <a href="<?= base_url() ?>products" class="animated fadeInLeftBig btn btn-info btn-lg">J'y vais</a>
                     </div>
                 </div>
                 <div class="item animated fadeInRight">
@@ -50,7 +50,7 @@
                     <div class="carousel-caption">
                         <h2 class="animated fadeInLeftBig">Compléments alimentaires</h2>
                         <p class="animated fadeInRightBig">Retrouvez tout nos Compléments alimentaires</p>
-                        <a href="#" class="animated fadeInLeftBig btn btn-info btn-lg">J'y vais</a>
+                        <a href="<?= base_url() ?>products" class="animated fadeInLeftBig btn btn-info btn-lg">J'y vais</a>
                     </div>
                 </div>   
             </div>

@@ -11,9 +11,6 @@
             <div class="row" style="margin-top:20px">
                 <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
                     <form id="myform" method="POST" role="form">
-                        <div class="alert alert-error">
-                            <a class="close" data-dismiss="alert" href="#">×</a>Nom d'utilisateur ou mot de passe incorrect
-                        </div>
                         <fieldset>
                             <h2>S'authentifier</h2>
 
@@ -27,7 +24,10 @@
                             <hr class="colorgraph">
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <input type="submit" class="btn btn-lg btn-success btn-block" value="Connexion">
+                                    <a class="btn btn-lg btn-success btn-block" href="<?= site_url("user/register?op1=on&op1=on&op1=on#") ?>">Créer un compte</a>     
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <input type="submit" class="btn btn-lg btn-success btn-block" value="Connexion">     
                                 </div>
                             </div>
                         </fieldset>

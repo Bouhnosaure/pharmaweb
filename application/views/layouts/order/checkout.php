@@ -75,33 +75,33 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Nom</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="name" class="form-control" placeholder="Nom" required>
+                                            <input type="text" name="name" class="form-control" value="<?= $this->session->userdata('USERS_NAME'); ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Prenom</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="surname" class="form-control" placeholder="Prenom" required>
+                                            <input type="text" name="surname" class="form-control" value="<?= $this->session->userdata('USERS_LASTNAME'); ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Adresse</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="adress" class="form-control" placeholder="Adresse" required>
+                                            <input type="text" name="adress" class="form-control" value="<?= $this->session->userdata('ADRESSES_LABEL'); ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Adresse complementaire</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="adresscomp" class="form-control" placeholder="Adresse complementaire" required>
+                                            <input type="text" name="adresscomp" class="form-control" value="<?= $this->session->userdata('ADRESSES_LABEL_COMP'); ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="ui-widget">
                                             <label class="col-sm-3 control-label">Ville</label>
                                             <div class="col-sm-9">
-                                                <input id="villeid" type="hidden" name="villeid">
-                                                <input id="ville" type="text" name="ville" data-mask="ville" class="form-control" placeholder="Ville" required>
+                                                <input id="villeid" type="hidden" name="villeid" value="<?= $this->session->userdata('12359'); ?>">
+                                                <input id="ville" type="text" name="ville" data-mask="ville" class="form-control" value="<?= $this->session->userdata('CITIES_NAME'); ?>" required>
                                             </div>
                                         </div>
                                     </div>

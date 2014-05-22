@@ -51,7 +51,6 @@
                                     <ul id="ddsubmenu1" class="ddsubmenustyle">
                                         <li><a href="<?= site_url("user") ?>">Mon Compte</a></li>
                                         <li><a href="<?= site_url("cart") ?>">Voir le panier</a></li>
-                                        <li><a href="<?= site_url("user/edit") ?>">Editer mon profil</a></li>
                                     </ul>
                                 </li>
                             <?php endif; ?>
