@@ -88,16 +88,13 @@ class User extends CI_Controller {
 
     public function edit() {
         if ($this->input->post()) {
+
             $this->auth_model->edit_user($this->input->post());
 
-
-            $user = $this->auth_model->get_user($this->session->userdata('USERS_MAIL'));
-
-            foreach ($user as $key => $value) {
+            foreach ($this->input->post() as $key => $value) {
                 $this->session->unset_userdata($key);
             }
-            $this->session->set_userdata($user);
-
+            $this->session->set_userdata($this->input->post());
             redirect("user/edit");
         } else {
             $data['user'] = $this->auth_model->get_user($this->session->userdata('USERS_MAIL'));
@@ -123,6 +120,40 @@ class User extends CI_Controller {
         $data['commands'] = $this->order_model->get_order_by_user($id);
         //var_dump($data);
         $this->load->view('layouts/cart/order', $data);
+    }
+
+    public function abort($id) {
+        if ($this->session->userdata('USERS_ID') == FALSE) {
+            redirect('/user/login', 'refresh');
+        }
+        $this->load->model('order_model');
+        $this->order_model->abort_order($id);
+        redirect("user");
+    }
+
+    public function question($id) {
+        if ($this->session->userdata('USERS_ID') == FALSE) {
+            redirect('/user/login', 'refresh');
+        }
+        $data['id'] = $id;
+        if ($this->input->post()) {
+            $this->load->model('order_model');
+            $this->order_model->question($this->input->post());
+            redirect("user");
+        } else {
+            $this->load->view('layouts/order/question', $data);
+        }
+    }
+
+    public function view_questions() {
+        if ($this->session->userdata('USERS_ID') == FALSE) {
+            redirect('/user/login', 'refresh');
+        }
+
+        $this->load->model('order_model');
+        $data['questions'] = $this->order_model->get_questions_by_user($this->session->userdata('USERS_ID'));
+        
+        $this->load->view('layouts/order/view_question', $data);
     }
 
 }

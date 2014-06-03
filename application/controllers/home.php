@@ -29,9 +29,11 @@ class Home extends CI_Controller {
     public function debug() {
         $datestring = "%d/%m/%Y";
         $time = time();
-
+        //$this->session->unset_userdata('USERS_LASTNAME');
         echo mdate($datestring, $time);
-        var_dump($this->session->all_userdata());
+        print '<pre>';
+        print_r($this->session->all_userdata());
+        print '</pre>';
     }
 
 }

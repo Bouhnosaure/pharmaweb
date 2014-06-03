@@ -136,4 +136,47 @@ class Order_model extends CI_Model {
         oci_close($this->db->conn_id);
     }
 
+    public function abort_order($id) {
+        $this->db->where('BILLS_ID', $id);
+        $this->db->update('BILLS', array('STATUTS_ID' => '7'));
+        oci_close($this->db->conn_id);
+    }
+
+    public function question($array) {
+        if ($this->session->userdata('USERS_ID') == FALSE) {
+            
+        } else {
+            try {
+                $this->db->trans_start();
+                $stmt = OCIParse($this->db->conn_id, "INSERT INTO QUESTIONS (BILLS_ID, QUESTIONS_SUBJECT, QUESTION_CONTENT) VALUES ('" . $array['BILLS_ID'] . "','" . $array['QUESTIONS_SUBJECT'] . "','" . $array['QUESTIONS_CONTENT'] . "')");
+                OCIExecute($stmt);
+                //$this->db->query("INSERT INTO QUESTIONS (BILLS_ID, QUESTIONS_SUBJECT, QUESTION_CONTENT) VALUES ('" . $array['BILLS_ID'] . "','" . $array['QUESTIONS_SUBJECT'] . "','" . $array['QUESTIONS_CONTENT'] . "');");
+                $this->db->trans_commit();
+            } catch (Exception $ex) {
+                $this->db->trans_rollback();
+                echo "Error:" . $ex;
+                die();
+            }
+            oci_close($this->db->conn_id);
+        }
+    }
+
+    public function get_questions_by_user($id) {
+        $this->db->select('BILLS_ID');
+        $this->db->where('USERS_ID', $id);
+        $results = $this->db->get('BILLS');
+
+        $array = array();
+        foreach ($results->result() as $result) {
+            $this->db->where('BILLS_ID', $result->BILLS_ID);
+            $questions = $this->db->get('QUESTIONS');
+            
+            if ($questions->result() != null) {
+                array_push($array, $questions->result());
+            }
+        }
+        return $array;
+        oci_close($this->db->conn_id);
+    }
+
 }

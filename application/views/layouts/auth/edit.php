@@ -38,6 +38,7 @@
         <div class="clearfix"></div>
         <div class="container">
             <div class="row">
+                <?php $this->load->view('elements/accountsidebar'); ?>
                 <?php //var_dump($user); ?>
                 <form class="form-horizontal group-border-dashed" id="wizardform" method="post" action="<?= site_url("user/edit") ?>" data-parsley-namespace="data-parsley-" data-parsley-validate novalidate> 
                     <div class="step-pane active" id="step1">

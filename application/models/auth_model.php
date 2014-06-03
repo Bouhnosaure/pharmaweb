@@ -20,6 +20,7 @@ class Auth_model extends CI_Model {
 
     public function get_user($mail) {
         $stmt = OCIParse($this->db->conn_id, "SELECT PHARMAWEB.USERS_PACK.GET_ONE_USER(:MAIL) AS mfrc FROM dual");
+        
         oci_bind_by_name($stmt, ':MAIL', $mail, 200);
 
         OCIExecute($stmt);

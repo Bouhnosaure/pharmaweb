@@ -9,7 +9,7 @@
         <div class="clearfix"></div>
         <div class="container">
             <div class="row">
-                <?php //$this->load->view('elements/accountsidebar'); ?>
+                <?php $this->load->view('elements/accountsidebar'); ?>
                 <div class="col-md-9">
                     <h3><i class="icon-user color"></i> &nbsp;Mon compte</h3>
                     <!-- Your details -->
@@ -52,7 +52,8 @@
                                     <td><?=$command['BILLS_ID']?></td>
                                     <td><?=$command['BILLS_DATE']?></td>
                                     <td><?=$command['STATUTS_LABEL']?></td>
-                                    <td><a href="<?= site_url("user/orderdetail").'/'.$command['BILLS_ID'] ?>">VOIR</a></td>
+                                    <td><a href="<?= site_url("user/orderdetail").'/'.$command['BILLS_ID'] ?>">Voir</a> | <a href="<?= site_url("user/abort").'/'.$command['BILLS_ID'] ?>">Annuler</a> | <a href="<?= site_url("user/question").'/'.$command['BILLS_ID'] ?>">Poser une question</a></td>
+                                    
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
